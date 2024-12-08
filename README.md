@@ -1,9 +1,7 @@
-# My Portfolio Project
-
-## Overview
+# Overview
 This portfolio web application is designed to showcase my projects, repositories, and personal details. It highlights my skills, accomplishments, and experiences in an interactive and visually appealing manner. The portfolio dynamically displays project data, including repository details, commit information, and rendered README previews.
 
----
+
 
 ## Features
 
@@ -26,7 +24,7 @@ This portfolio web application is designed to showcase my projects, repositories
 - Hover effects for project thumbnails.
 - Links to view repository details directly on GitHub.
 
----
+
 
 ## Technologies Used
 
@@ -42,7 +40,7 @@ This portfolio web application is designed to showcase my projects, repositories
 - **Markdown2**: For converting README files into HTML.
 - **GitHub API**: Fetching repository details dynamically.
 
----
+
 
 ## Project Details
 
@@ -56,7 +54,7 @@ Each project dynamically pulls data from GitHub and displays it, including:
 - All repositories use a default fallback image for consistency.
 - Circular thumbnails enhance visual presentation.
 
----
+
 
 ## Setup Instructions
 
@@ -70,12 +68,12 @@ Each project dynamically pulls data from GitHub and displays it, including:
    ```bash
    git clone <repository_url>
    cd <repository_name>
-   ```
+   `
 
 2. Install the required dependencies:
    ```bash
    pip install -r requirements.txt
-   ```
+   
 
 3. Run migrations to set up the database:
    ```bash
@@ -85,29 +83,27 @@ Each project dynamically pulls data from GitHub and displays it, including:
 4. Start the development server:
    ```bash
    python manage.py runserver
-   ```
+   
 
 5. Open your browser and navigate to:
    ```
    http://127.0.0.1:8000
-   ```
+   
 
----
+
 
 ## Future Enhancements
 - Add support for fetching user profile details dynamically from GitHub.
 - Include charts and visualizations of GitHub activity.
 - Enable visitors to leave feedback or comments on showcased projects.
 
----
+
 
 ## Contact
 - **Name**: Isaac Obi Arum
 - **Email**: [obinnho@gmail.com](mailto:arumi21@students.ecu.ecu)
 - **LinkedIn**: [Isaac Obi Arum](https://linkedin.com/in/isaac-arum)
 
----
 
-## License
-This project is licensed under the MIT License. Feel free to use or modify it as needed.
+
 
