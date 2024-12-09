@@ -1,0 +1,115 @@
+/* Main Stationary Container for Projects */
+.project-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Keeps the main container stationary */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the webpage */
+    height: 100vh; /* Full viewport height */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
+    z-index: 100; /* Ensure it stays above other elements */
+    box-sizing: border-box; /* Include padding in dimensions */
+    overflow: hidden; /* Disable scrolling */
+}
+
+/* Title */
+.project-section .section-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    font-style: italic;
+    color: green; /* Title text color */
+    margin: 0 auto; /* Center align */
+}
+
+/* Scrollable Content within Stationary Container */
+.project-list {
+    background-color: transparent; /* Transparent background for scrollable content */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional subtle shadow */
+    width: 80%; /* Width of the content box */
+    max-width: 800px; /* Maximum width for content */
+    height: 70%; /* Height of the scrollable content */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid layout */
+    gap: 20px; /* Space between grid items */
+    box-sizing: border-box; /* Prevent padding overflow */
+}
+
+/* Project Item Container for each repo */
+.project-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* Transparent background */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: none; /* Remove additional shadows */
+    text-align: center; /* Center content alignment */
+}
+
+/* Project Image */
+.project-item .project-image img {
+    width: 150px; /* Match the profile image width */
+    height: 150px; /* Match the profile image height */
+    border-radius: 50%; /* Circular image */
+    object-fit: cover; /* Maintain aspect ratio */
+    border: 2px solid white; /* Add a white border */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Optional subtle shadow */
+    margin-bottom: 15px;
+}
+
+.project-name {
+    color: green;
+    font-style: italic;
+}
+
+.commit-link{
+    color: green;
+}
+
+/* Op tional: Custom Scrollbar for Project List */
+.project-list::-webkit-scrollbar {
+    width: 0px;
+}
+
+.project-list::-webkit-scrollbar-thumb {
+    background-color: #888; /* Scrollbar thumb color */
+    border-radius: 4px;
+}
+
+
+
+/* Project List as Grid */
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Always display 3 items per row */
+    gap: 10px; /* Space between items */
+    width: 100%;
+    max-width: 1200px; /* Limit the width of the grid */
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box; /* Prevent overflow caused by padding */
+    overflow-y: auto; /* Allow vertical scrolling if needed */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 900px) {
+    .project-list {
+        grid-template-columns: repeat(2, 1fr); /* Show 2 items per row on smaller screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .project-list {
+        grid-template-columns: repeat(1, 1fr); /* Show 1 item per row on very small screens */
+    }
+}

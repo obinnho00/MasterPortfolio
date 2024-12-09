@@ -1,0 +1,76 @@
+
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}Profile Hub{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'Css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'Css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+   
+</head>
+<body>
+    <header>
+        <div class="top-nav">
+            <div class="name-title">
+                <a href="{% url 'home' %}" class="name">Isaac</a>
+                <a href="" class="Home">Software Engineer</a>
+            </div>
+
+            <div class="left-nav">
+                <button class="top-right" id="chart" title="Chat">
+                    <i class="bi bi-chat"></i> Chat
+                </button>
+                <button class="top-right" id="introdoctionpage" title="Intro">
+                    <i class="bi bi-person"></i> Intro
+                </button>
+                
+                <div class="dropdown">
+                    <button class="top-right dropbtn" id="project" title="Projects">
+                        <i class="bi bi-folder"></i> Projects
+                        
+                    </button>
+                    <div class="dropdown-content">
+                        <button id="current-project" title="Current Projects">Current</button>
+                        <button id="past-project" title="Past Projects">Past</button>
+                    </div>
+                </div>
+            
+                <button class="top-right" id="skill" title="Skill">
+                    <i class="bi bi-tools"></i> Skill
+                </button>
+                <button class="top-right" id="cv" title="CV">
+                    <i class="bi bi-file-earmark-person"></i> CV
+                </button>
+            </div> 
+                
+            
+        </div>
+    </header>
+    <!-- Main Content Section -->
+    <div class="content-container">
+        {% block content %}
+        <!-- Page-specific content goes here -->
+        {% endblock %}
+    </div>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Isaac Obi Arum | All rights reserved.</p>
+            <div class="footer-links">
+                <a href="/privacy-policy/">Privacy Policy</a> |
+                <a href="/terms-of-service/">Terms of Service</a> |
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/current_project.js' %}"></script>
+    <script src="{% static 'js/intro_content.js' %}"></script>
+</body>
+</html>
+

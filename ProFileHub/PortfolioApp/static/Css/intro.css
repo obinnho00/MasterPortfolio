@@ -1,0 +1,80 @@
+/* Main stationary container */
+.introduction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Keeps the main container stationary */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the webpage */
+    height: 100vh; /* Adjustable height - you can control it */
+    background-color: rgba(0, 0, 0, 0.8); /* Optional: Add a semi-transparent background */
+    z-index: 00; /* Ensures it stays above other elements */
+    
+}
+.H1 {
+    text-align: center;
+    font-style: italic;
+}
+
+/* Profile Image */
+.picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.picture img {
+    width: 150px; /* Adjust the width of the image */
+    height: 150px; /* Adjust the height of the image */
+    border-radius: 50%; /* Ensures the image remains circular */
+    object-fit: cover; /* Ensures the image scales and crops proportionally */
+    border: 2px solid white; /* Optional: Add a border around the image */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Optional: Add a subtle shadow */
+}
+
+
+/* Scrollable content within the stationary container */
+.introduction-content {
+    background-color: transparent; /* White background for the scrollable content */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%; /* Width of the content box */
+    max-width: 800px; /* Maximum width to keep content manageable */
+    height: 70%; /* Adjustable height of the scrollable content */
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+/* Items inside the scrollable content */
+.intro-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: transparent;
+    border: 1px transparent;
+    border-radius: 5px;
+}
+
+.intro-item p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Optional: Make scrollbar visually appealing */
+.introduction-content::-webkit-scrollbar {
+    width: 0px;
+    
+}
+
+.introduction-content::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.introduction-content::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}

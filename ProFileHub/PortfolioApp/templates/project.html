@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Projects
+{% endblock %}
+
+{% block content %}
+<div class="project-section">
+    <h1 class="section-title">Projects</h1>
+
+    <!-- Search and Filter Controls -->
+    <div class="controls">
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search by any field..." />
+        </div>
+        <div class="filter-container">
+            <select id="sizeFilter">
+                <option value="">Filter by Size</option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Projects Table -->
+    <div class="table-container">
+        <table id="projectsTable" class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Technologies Used</th>
+                    <th>Project URL</th>
+                    <th>Repository URL</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                <tr>
+                    <td>{{ project.title }}</td>
+                    <td>{{ project.description|default:"N/A" }}</td>
+                    <td>{{ project.start_date|default:"N/A" }}</td>
+                    <td>{{ project.end_date|default:"N/A" }}</td>
+                    <td>{{ project.technologies_used|default:"N/A" }}</td>
+                    <td>
+                        {% if project.project_url %}
+                        <a href="{{ project.project_url }}" target="_blank">View Project</a>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if project.repository_url %}
+                        <a href="{{ project.repository_url }}" target="_blank">View Repository</a>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>{{ project.size|default:"Medium" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div id="pagination"></div>
+    </div>
+</div>
+
+<script src="{% static 'js/projectTable.js' %}"></script>
+<link rel="stylesheet" href="{% static 'Css/project.css' %}">
+
+{% endblock %}

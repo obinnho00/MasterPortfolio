@@ -1,0 +1,181 @@
+/* Body Styling */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hides both horizontal and vertical overflow */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full height */
+    background-color: black; /* Fallback color */
+    box-shadow: 0 4px 6px rgb(0, 0, 0);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    perspective: 1000px; /* Enables 3D perspective for nested elements */
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(0, 0, 0); /* Dark background for header */
+    z-index: 1000; /* Ensure it stays above all content */
+    padding: 10px 20px; /* Adds space inside the header */
+    display: flex;
+    justify-content: space-between; /* Distribute elements evenly */
+    align-items: center; /* Vertically align all items */
+    box-sizing: border-box; /* Include padding in width/height calculations */
+    color: white; /* Text color */
+    height: auto; /* Allow height to adapt based on content */
+    min-height: 50px; /* Set a minimum height for the header */
+    max-height: 100px; /* Optional: Limit header height */
+    transition: height 0.3s ease; /* Smooth transition for resizing */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Optional shadow for depth */
+    
+}
+
+
+/* Flex container for navigation */
+header .top-nav {
+    display: flex;
+    justify-content: space-between; /* Positions elements to far left and far right */
+    align-items: center; /* Vertically centers items */
+    width: 100%; /* Ensures full-width alignment */
+}
+
+/* Styling for Name and Title Section */
+header .name-title {
+    display: flex;
+    flex-direction: row; /* Keeps Name and Title in a horizontal row */
+    align-items: center; /* Vertically aligns the Name and Title */
+    justify-content: flex-start;
+    gap: 0px;
+    margin-right: auto;
+}
+
+header .name-title a {
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 10px;
+    white-space: nowrap; /* Prevents text from breaking into multiple lines */
+}
+
+/* Styling for Navigation Buttons */
+header .left-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1px;
+    margin-left: auto;
+}
+
+header .left-nav button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 55px;
+}
+
+/* Dropdown Styling */
+header .dropdown {
+    position: relative;
+}
+
+header .dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position dropdown below button */
+    left: 0;
+    background-color: rgb(40, 40, 40); /* Slightly lighter for better contrast */
+    color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+header .dropdown-content button {
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+header .dropdown-content button:hover {
+    background-color: green;
+}
+
+header .dropdown:hover .dropdown-content {
+    display: block; /* Show dropdown on hover */
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(0, 0, 0); /* Dark background for footer */
+    color: white;
+    text-align: center;
+    padding: 40px 0;
+    z-index: 1000;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow above footer */
+}
+
+footer .footer-content p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer .footer-links {
+    margin-top: 10px;
+}
+
+footer .footer-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+footer .footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content Area */
+.content-container {
+    margin-top: calc(10px + 50px); /* Adjust for header height */
+    margin-bottom: calc(20px + 50px); /* Adjust for footer height */
+    padding: 20px;
+    overflow-y: auto; /* Enable vertical scrolling for long content */
+    box-sizing: border-box;
+    height: calc(100vh - (50px + 50px)); /* Fill remaining space */
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    footer {
+        padding: 15px 10px;
+    }
+
+    footer .footer-links {
+        margin-top: 5px;
+    }
+
+    footer .footer-links a {
+        margin: 0 5px;
+        font-size: 12px;
+    }
+}

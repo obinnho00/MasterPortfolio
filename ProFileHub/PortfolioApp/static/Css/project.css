@@ -1,0 +1,120 @@
+.project-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full height of the viewport */
+    text-align: center;
+    padding: 20px;
+    border-radius: 55px;
+    box-shadow: 0 4px 6px rgb(0, 0, 0);
+    width: 95%;
+    max-width: 1200px;
+    margin: auto;
+    
+}
+
+/* Section Title */
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: green;
+    font-style: italic;
+}
+
+/* Controls Layout */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 20px;
+    border-radius: 55px;
+}
+
+.search-container {
+    flex: 1;
+    text-align: left;
+    border: 1px;
+    border-radius: 25px;
+}
+
+.filter-container {
+    flex: 1;
+    text-align: right;
+}
+
+.search-container input,
+.filter-container select {
+    width: 90%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 55px;
+    outline: none;
+}
+
+/* Table Styling */
+.table-container {
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 10px;
+    overflow-x: auto; /* Allow horizontal scrolling on small screens */
+    border-radius: 10px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; /* Automatically adjust column width based on content */
+    margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.table  {
+    background-color: #f4f4f4;
+    font-style: italic;
+    white-space: nowrap; /* Prevent wrapping of headers */
+}
+
+.table td {
+    word-wrap: break-word; /* Allow text to wrap within cells */
+    overflow-wrap: break-word;
+    white-space: normal; /* Allow content in cells to wrap */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+    background-color:rgb(218, 222, 218);
+}
+
+/* Pagination Styling */
+#pagination {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.page-number {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.page-number.active {
+    background-color:white;
+    color: white;
+    border-color: white;
+}
