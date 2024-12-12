@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "main-base.html" %}
 
 {% load static %}
 
@@ -28,11 +28,11 @@ Current GitHub Projects
                 <strong class="project-name">{{ repo.repo_name }}</strong><br>
                 <span class="commit-details">
                     <strong>Latest Commit:</strong> {{ repo.latest_commit.message }}<br>
-                    <strong>Author:</strong> {{ repo.latest_commit.author }}<br>
-                    <strong>Date:</strong> {{ repo.latest_commit.date }}
+                    <strong>Author Name:</strong> {{ repo.latest_commit.author }}<br>
+                    <strong>Date of commit:</strong> {{ repo.latest_commit.date }}
                 </span><br>
                 <a href="{{ repo.latest_commit.url }}" class="commit-link">View Commit</a><br>
-                <h3>OVERVIEW</h3>
+                <h3>Overview</h3>
                 <div class="readme-content">{{ repo.readme|safe }}</div>
             </div>
         </div>
@@ -41,6 +41,7 @@ Current GitHub Projects
 </div>
 
 <!-- Include CSS and JavaScript -->
+<script src="{% static 'js/current_project.js' %}"></script>
 <script src="{% static 'js/intro_content.js' %}"></script>
 <link rel="stylesheet" href="{% static 'Css/repo.css' %}">
 

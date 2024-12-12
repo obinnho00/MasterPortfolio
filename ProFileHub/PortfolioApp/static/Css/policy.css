@@ -1,0 +1,97 @@
+/* Modal Background */
+.policy-modal {
+    display: none; /* Initially hidden */
+    position: fixed;
+    z-index: 1000; /* Ensure it stays on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full-screen width */
+    height: 100%; /* Full-screen height */
+    overflow: hidden; /* Disable scrolling */
+    background-color: rgba(0, 0, 0, 0.8); /* Black with transparency */
+}
+
+/* Modal Content Box */
+.policy-modal-content {
+    background-color: #1a1a1a; /* Dark theme background */
+    color: #fff; /* White text */
+    position: absolute; /* Positioning for centering */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to align center */
+    padding: 30px;
+    border-radius: 20px; /* Rounded corners */
+    width: 80%; /* Width of the popup */
+    max-width: 600px; /* Maximum width for larger screens */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+}
+
+/* Close Button */
+.policy-close-button {
+    color: #fff; /* White for visibility */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.policy-close-button:hover,
+.policy-close-button:focus {
+    color: #ff6347; /* Red on hover */
+}
+
+/* Section Title */
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    font-style: italic;
+    color: #00bfff; /* Light blue for the title */
+    margin-bottom: 20px;
+}
+
+/* Section Subtitle */
+.policy-subtitle {
+    color: #00ff00; /* Green for subtitles */
+    font-size: 1.5rem;
+    margin-top: 15px;
+    border-bottom: 2px solid #444; /* Subtle divider */
+    padding-bottom: 5px;
+}
+
+/* Paragraphs */
+.policy-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #ddd; /* Light gray for readability */
+    margin-top: 10px;
+}
+
+/* Button */
+.custom-btn {
+    background-color: #444;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 2px solid #00bfff; /* Match section title color */
+    transition: all 0.3s ease-in-out;
+    display: block; /* Ensure the button takes full width */
+    margin: 20px auto; /* Center the button horizontally */
+    text-align: center;
+    width: fit-content; /* Shrink the button to fit content */
+}
+
+.custom-btn:hover {
+    background-color: #00bfff;
+    border-color: #fff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .policy-modal-content {
+        width: 90%; /* Adjust width for smaller screens */
+        padding: 20px;
+    }
+}

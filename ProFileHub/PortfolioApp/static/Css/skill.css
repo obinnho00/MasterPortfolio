@@ -1,0 +1,119 @@
+/* Main Container for Skills Section */
+.skill-section {
+    display: flex;
+    flex-direction: column; /* Align content vertically */
+    justify-content: flex-start; /* Content starts at the top */
+    align-items: center; /* Center horizontally */
+    position: absolute; /* Position the section relative to the page */
+    top: 10%;
+    left: 0;
+    width: 100%; /* Full width of the webpage */
+    min-height: 100vh; /* Full viewport height */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
+    z-index: 100; /* Ensure it stays above other elements */
+    box-sizing: border-box; /* Include padding in dimensions */
+    padding: 20px 0; /* Add vertical padding */
+    overflow-y: hidden; /* Allow vertical scrolling */
+    overflow-x: hidden; /* Disable horizontal scrolling */
+}
+
+
+/* Progress Bar Container */
+.progress {
+    width: 50%; /* Full width of the container */
+    background-color: #f3f3f3; /* Light gray background */
+    border-radius: 20px; /* Rounded corners for the container */
+    overflow: hidden; /* Ensure no overflow */
+    height: 20px; /* Height of the progress bar */
+    margin-top: 10px; /* Spacing from the skill name */
+    position: relative;
+}
+
+/* Progress Bar Fill */
+.progress-bar {
+    height: 100%; /* Fill the container height */
+    background-color: #4caf50; /* Green progress fill */
+    text-align: center; /* Center the text */
+    color: white; /* Text color */
+    line-height: 20px; /* Center text vertically */
+    font-size: 12px; /* Adjust text size */
+    width: 0; /* Start with 0 width */
+    border-radius: 20px; /* Add rounded corners to the progress bar itself */
+    transition: width 5s linear; /* Smooth animation */
+}
+
+
+/* Section Title Styling */
+.skill-section .section-title {
+    text-align: center;
+    font-size: 4rem; /* Larger font size for visibility */
+    font-weight: bold;
+    font-style: italic;
+    color:white; /* Bright blue for contrast */
+    margin-bottom: 20px; /* Space below the title */
+    width: 100%; /* Ensure it spans across the section */
+    z-index: 101; /* Make sure it appears above other content */
+}
+
+/* Scrollable Content */
+.skill-list {
+    width: 100%; /* Use 90% of the page width */
+    max-width: 1200px; /* Limit maximum width */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid layout */
+    gap: 10px; /* Space between grid items */
+    justify-content: center;
+    align-items: start; /* Align items at the top of each column */
+    margin-top: 20px; /* Space between the title and the content */
+    box-sizing: border-box; /* Include padding in dimensions */
+    overflow: hidden;
+}
+
+/* Skill Item Container */
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    background-color:transparent; /* Dark background for each skill */
+    color: #fff; /* White text for contrast */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+
+/* Skill Name */
+.skill-name {
+    font-size: 1.5rem;
+    font-style: italic;
+    color:#00aaff;
+    margin-bottom: 5px; /* Space below the name */
+}
+
+/* Skill Description */
+.skill-description {
+    font-size: 9px;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+    color: #00aaff; /* Bright blue for contrast */
+    margin-bottom: 20px; /* Space below the title */
+    width: 100%; /* Ensure it spans across the section */
+    z-index: 101; /* Make sure it appears above other content */
+   
+}
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 900px) {
+    .skill-list {
+        grid-template-columns: repeat(2, 1fr); /* Show 2 items per row */
+    }
+}
+
+@media (max-width: 600px) {
+    .skill-list {
+        grid-template-columns: repeat(1, 1fr); /* Show 1 item per row */
+    }
+}

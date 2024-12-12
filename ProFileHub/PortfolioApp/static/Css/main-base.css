@@ -1,0 +1,160 @@
+
+.custom-navigation{
+    background-color: transparent;
+    width: 100;
+    position: fixed; /* Keeps the header always at the top */
+    top: 0; /* Sticks it to the top of the viewport */
+    left: 0;
+    width: 100%;
+    z-index: 1050
+}
+
+/* Custom Navbar Brand */
+.top-nave-Name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 55px;
+    border-color: #218838;
+}
+.top-nave-Name:hover{
+    color: #218838;
+
+}
+
+.top-nav-title{
+    font-style: italic;
+    color: #ffffff;
+    font-size: 1.5rem;
+}
+
+/* Custom Button Styles */
+.chart-button {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 2px solid #000000;
+    transition: all 0.3s ease-in-out;
+
+}
+.chart-icon {
+    color: #218838;
+   
+}
+
+.chart-button:hover {
+    background-color: black;
+    color: #bfd1e3;
+    border-color: #b6bcc2;
+}
+
+.intro-button {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 2px solid #000000;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.intro-button:hover {
+    background-color: black;
+    color: #bfd1e3;
+    border-color: #b6bcc2;
+}
+
+.project-button {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 2px solid #000000;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.drop-down-item{
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 2px solid #000000;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.project-menue { 
+
+    background-color: black;
+    color: rgb(246, 246, 246);
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 2px solid #000000;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.project-button:hover {
+    background-color: black;
+    color: #bfd1e3;
+    border-color: #b6bcc2;
+}
+
+.cv-button {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 2px solid #000000;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.skill-button {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 2px solid #000000;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.skill-button:hover, .cv-button:hover {
+    background-color: black;
+    color: #bfd1e3;
+    border-color: #b6bcc2;
+}
+
+
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+    background-color: rgb(0, 0, 0);
+
+}
+
+body {
+    padding-bottom: 80px;
+    background-color: #000000; 
+}
+
+
+@media screen and (max-width: 768px) {
+    footer {
+        padding: 15px 10px;
+    }
+
+    footer .footer-links {
+        margin-top: 5px;
+    }
+
+    footer .footer-links a {
+        margin: 0 5px;
+        font-size: 12px;
+    }
+}

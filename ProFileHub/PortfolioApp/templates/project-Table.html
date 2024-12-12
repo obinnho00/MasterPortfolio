@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "main-base.html" %}
 
 {% load static %}
 
@@ -7,27 +7,9 @@ Projects
 {% endblock %}
 
 {% block content %}
-<div class="project-section">
-    <h1 class="section-title">Projects</h1>
-
-    <!-- Search and Filter Controls -->
-    <div class="controls">
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Search by any field..." />
-        </div>
-        <div class="filter-container">
-            <select id="sizeFilter">
-                <option value="">Filter by Size</option>
-                <option value="Small">Small</option>
-                <option value="Medium">Medium</option>
-                <option value="Large">Large</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- Projects Table -->
+<div class="content-wrapper">
     <div class="table-container">
-        <table id="projectsTable" class="table">
+        <table id="projectsTable" class="table table-striped table-bordered table-hover custom-table">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -67,11 +49,18 @@ Projects
                 {% endfor %}
             </tbody>
         </table>
-        <div id="pagination"></div>
+    </div>
+    <div class="alert-container">
+        <div class="table-alert">
+            <strong>Note:</strong> This table may not reflect all my repositories or current GitHub projects due to certain restrictions. 
+            Some repositories are private, restricted by professors, or cannot be shared publicly. To view all my latest activities and real-time updates on projects, please visit the 
+            <a href="{% url 'current_repo' %}" class="alert-link">Projects section</a> and explore the provided links.
+        </div>
     </div>
 </div>
 
-<script src="{% static 'js/projectTable.js' %}"></script>
-<link rel="stylesheet" href="{% static 'Css/project.css' %}">
-
+<link rel="stylesheet" href="{% static 'Css/table.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'js/tableStyling.js' %}"></script>
 {% endblock %}

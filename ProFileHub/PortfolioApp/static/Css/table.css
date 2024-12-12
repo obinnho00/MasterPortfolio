@@ -1,0 +1,240 @@
+/* Center the table on the page and make it stationary */
+.table-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;    /* Center vertically */
+    min-height: 100vh;      /* Full viewport height */
+    background-color: #000000; /* Black background */
+    padding: 20px;
+    width: 100%;            /* Take full width */
+    position: fixed;        /* Make the container stationary */
+    top: 0;                 /* Align with the top of the viewport */
+    left: 0;                /* Align with the left of the viewport */
+    overflow: hidden;       /* Remove overflow */
+}
+
+/* Apply a background color to the entire table header */
+.custom-table thead {
+    background-color: #414243; /* Replace with your desired color */
+    color: #ffffff;            /* Text color for contrast */
+    font-weight: bold;         /* Bold header text */
+}
+
+/* Optionally target individual header cells */
+.custom-table th {
+    padding: 15px;             /* Add spacing for better layout */
+    text-align: center;        /* Center align the header text */
+    border: 1px solid #dee2e6; /* Optional: Add a border for separation */
+    background-color: #606162; /* Ensure consistent header cell background */
+    color: #ffffff;            /* Text color for header cells */
+}
+
+
+/* Style the table */
+.custom-table {
+    border: 5px solid #343a40; /* Thick dark border around the table */
+    border-radius: 14px;       /* Rounded corners for the table */
+    width: 100%;               /* Full width of the container */
+    background-color: #ffffff; /* Table background color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: #000;               /* Text color */
+    overflow: hidden;          /* Prevent overflow within the table */
+}
+
+/* Header styling */
+.custom-table thead {
+    background-color: #3aa330; /* Dark background for header */
+    color: #ffffff;            /* White text */
+    font-weight: bold;
+    text-align: center;
+    
+}
+
+/* Styling for table cells */
+.custom-table td, 
+.custom-table th {
+    padding: 15px;           /* Add padding */
+    text-align: center;      /* Center align text */
+    border-top: 1px solid #dee2e6; /* Add borders between rows (consistent with Bootstrap) */
+    color: #000;             /* Black text for readability */
+}
+
+/* Remove top border from the first row */
+.custom-table tbody tr:first-child td {
+    border-top: none;
+}
+
+/* Hover effect for rows */
+.custom-table tbody tr:hover {
+    background-color: black; /* Light gray hover effect */
+}
+
+/* Customize links inside the table */
+.custom-table td a {
+    color: green;
+    text-decoration: none;
+}
+
+.custom-table td a:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+/* Style the DataTables search/filter input */
+.dataTables_filter input {
+    width: 50%;                 /* Adjust input width */
+    padding: 10px;              /* Add padding */
+    border-radius: 5px;         /* Rounded corners */
+    border: 1px solid #ced4da;  /* Border color */
+    color: #000;                /* Black text */
+    background-color: #ffffff;  /* White background */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    margin-left: 10px;          /* Add spacing */
+}
+
+/* Style the DataTables pagination buttons */
+.dataTables_paginate .paginate_button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: 1px solid #ced4da;  /* Border color */
+    border-radius: 5px;         /* Rounded corners */
+    color: green;             /* Text color */
+    background-color: #f8f9fa;  /* Light gray background */
+    transition: all 0.3s ease;  /* Smooth hover transition */
+}
+
+.dataTables_paginate .paginate_button:hover {
+    background-color: green;  /* Hover background color */
+    color: #fff;                /* Hover text color */
+    border-color: #0056b3;      /* Hover border color */
+}
+
+/* Highlight the current page in pagination */
+.dataTables_paginate .paginate_button.current {
+    background-color: #f1f1f1;  /* Current page background */
+    color: #fff;                /* Current page text color */
+    border-color: green;      /* Current page border color */
+}
+
+/* Align the "Show entries" dropdown and "Search" input */
+.dataTables_wrapper .dataTables_length {
+    float: left; /* Align to the left */
+}
+
+.dataTables_wrapper .dataTables_filter {
+    float: right; /* Align to the right */
+    text-align: right; /* Ensure alignment for content */
+}
+
+/* Clear floats for proper layout */
+.dataTables_wrapper:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Align pagination and "Showing entries" information */
+.dataTables_wrapper .dataTables_info {
+    float: left; /* Align "Showing entries" to the left */
+    margin-top: 10px; /* Add spacing */
+    color: #fff; /* Make the text readable if the background is dark */
+    
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    float: right; /* Align "Previous" and "Next" to the right */
+    margin-top: 5px; /* Add spacing */
+}
+
+
+
+
+/* Style the dropdown and input fields */
+.dataTables_length select,.dataTables_filter input {
+    width: auto; /* Adjust width dynamically */
+    padding: 4px; /* Add padding */
+    margin: 5px; /* Add spacing */
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 55px; /* Rounded corners */
+    background-color: #ffffff; /* Background color */
+    color: #000000; /* Text color */
+}
+
+/* Style the pagination buttons */
+.dataTables_paginate .paginate_button {
+    margin: 0 5px;
+    color: white; /* Text color */
+    background-color: black; /* Light gray background */
+    transition: all 0.1s ease; /* Smooth transition */
+    border-radius: 55px;
+}
+
+.dataTables_paginate .paginate_button:hover {
+    background-color: black; /* Hover background color */
+    color: #fff; /* Hover text color */
+  
+}
+
+.dataTables_paginate .paginate_button.current {
+    background-color: green; /* Current page background */
+    color: #fff; /* Current page text color */
+   
+
+
+
+}
+
+
+/* Wrapper for table and alert */
+.content-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: flex-start; /* Align items at the top */
+    width: 100%; /* Full width */
+    padding: 20px; /* Add padding */
+    background-color: #000; /* Black background */
+}
+
+
+
+/* Center and position the alert container at the bottom */
+.alert-container {
+    position: fixed;          /* Fix the position of the alert */
+    bottom: 13%;                /* Align it to the bottom of the viewport */
+    width: 100%;              /* Full width of the viewport */
+    display: flex;            /* Flexbox for centering */
+    justify-content: center;  /* Center the alert horizontally */
+    padding: 10px;            /* Padding around the alert */
+    background-color: transparent; /* Optional transparent background */
+    z-index: 1000;            /* Ensure it's above other elements */
+}
+
+/* Alert styling */
+.table-alert {
+    max-width: 80%;           /* Ensure the alert width does not exceed table width */
+    padding: 15px;            /* Inner padding */ 
+    background-color: transparent; /* Light blue background for info alert */
+    color: white;           /* Dark blue text color */
+    font-size: 14px;          /* Font size for text */
+    line-height: 1.5;         /* Line spacing for readability */
+    text-align: center;       /* Center align text */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+}
+
+/* Alert link styling */
+.table-alert a.alert-link {
+    color: green;           /* Match text color */
+    text-decoration: underline; /* Underline the link */
+}
+
+/* Ensure alert never overlaps table */
+.table-container + .alert-container {
+    margin-top: 20px; /* Space between the table and the alert */
+}
+
+/* Ensure alert does not resize */
+.table-alert a.alert-link {
+    color: green; /* Match text color */
+    text-decoration: underline; /* Underline the link */
+}

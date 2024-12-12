@@ -1,0 +1,32 @@
+{% extends "main-base.html" %}
+
+{% load static %}
+
+{% block title %}
+Website Policies
+{% endblock %}
+
+{% block content %}
+<!-- Policy Modal -->
+<!-- Policy Modal -->
+<div id="policy-popup" class="policy-modal">
+    <div class="policy-modal-content">
+        <span class="policy-close-button">&times;</span>
+        <h1 class="section-title">Website Policy</h1>
+
+        <!-- Dynamic Policies -->
+        <div class="policy-section">
+            <h2 class="policy-subtitle">Policy Statement</h2>
+            <p>This is a sample policy statement. Replace with dynamic content.</p>
+            <h2 class="policy-subtitle">Time and Date</h2>
+            <p>Created: <span id="policy-created-at">N/A</span></p>
+            <p>Last Updated: <span id="policy-updated-at">N/A</span></p>
+        </div>
+    </div>
+</div>
+
+<button id="open-policy-popup" class="btn btn-primary custom-btn">View Website Policies</button>
+<!-- Include CSS and JS -->
+<link rel="stylesheet" href="{% static 'Css/policy.css' %}">
+<script src="{% static 'js/policy.js' %}"></script>
+{% endblock %}

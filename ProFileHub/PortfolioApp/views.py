@@ -18,7 +18,7 @@ from PortfolioApp.gitconfig.gitconfig import GITHUB_API_URL, USERNAME, TOKEN
 
 
 from django.views import View
-from .models import AboutMe, Project
+from .models import AboutMe, Project, TechnicalSkill
 
 
 
@@ -145,6 +145,94 @@ class PastProjectView(ProjectView):
                     dict(zip(columns, row)) for row in cursor.fetchall()
                 ]  # Map rows to dictionaries
 
-            return render(request, "project.html", {"projects": data})
+            return render(request, "project-Table.html", {"projects": data})
         except Exception as e:
             return HttpResponse(f"Database error: {str(e)}", status=500)
+        
+
+class SkillListView(View):
+    template_name = 'skill.html'
+
+    def get(self, request, *args, **kwargs):
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT id, name, proficiency, created_at, updated_at, picture FROM skills")
+            skills = [
+                {
+                    'id': row[0],
+                    'name': row[1],
+                    'proficiency': row[2],
+                    'created_at': row[3],
+                    'updated_at': row[4],
+                    'picture': row[5],
+                }
+                for row in cursor.fetchall()
+            ]
+
+        context = {
+            'skills': skills
+        }
+        return render(request, self.template_name, context)
+
+
+
+class Technical_Skills(View):
+    def get(self, request):
+        query = "SELECT category, name, description, skill_level FROM technical_skill"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            skills = [
+                {
+                    'category': row[0],
+                    'name': row[1],
+                    'description': row[2],
+                    'skill_level':row[3]
+                }
+                for row in cursor.fetchall()
+            ]
+
+        data = {
+            'skills': skills
+        }
+        return render(request, 'technical_skill.html', data)
+
+
+class WebsitePolicyView(View):
+    """
+    Class-based view to handle the display of website policies using a raw SQL query.
+    """
+
+    def get(self, request):
+        # Raw SQL query to fetch policy data
+        query = "SELECT policy_statement, created_at, updated_at FROM website_policy"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            policies = [
+                {
+                    "policy_statement": row[0],
+                    "created_at": row[1],
+                    "updated_at": row[2],
+                }
+                for row in cursor.fetchall()
+            ]
+
+        # Render the template with policies data
+        return render(request, 'policy_popup.html', {'policies': policies})
+
+
+
+class ReferenceView(View):
+    def get(self, request):
+        query = "SELECT name, email, company, role, picture FROM reference_table"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            reference_data = [
+                {
+                    "name": row[0],
+                    "email": row[1],
+                    "company": row[2],
+                    "role": row[3],
+                    "picture": row[4],  # Ensure this stores the correct file path
+                }
+                for row in cursor.fetchall()
+            ]
+        return render(request, "reference.html", {'reference_data': reference_data, 'MEDIA_URL': settings.MEDIA_URL})

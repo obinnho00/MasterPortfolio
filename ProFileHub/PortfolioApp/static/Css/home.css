@@ -1,15 +1,17 @@
-/* Main Container */
+/* Main Stationary Container */
 .main-container {
-    background-color: transparent; 
-    min-height: 100vh; /* Full viewport height */
-    display: flex; 
-    flex-direction: row; 
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 20px; 
-    gap: 2px; 
-    overflow: hidden; /* Prevent scrolling */
-    box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Keeps the main container stationary */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the webpage */
+    height: 100vh; /* Full viewport height */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
+    z-index: 100; /* Ensure it stays above other elements */
+    box-sizing: border-box; /* Include padding in dimensions */
+    overflow: hidden; /* Disable scrolling */
 }
 
 /* Profile Section */
@@ -20,28 +22,22 @@
     padding: 20px;
     border-radius: 10px;
     text-align: center; 
-    overflow-x: hidden; /* Prevent content overflow */
-    overflow-y: hidden;
-
 }
 
 /* Profile Image */
 .profile-image {
     position: relative; 
     display: inline-block; 
-    width: auto; 
-    height: auto; 
+    width: 300px; /* Set a fixed size for consistency */
+    height: 300px; /* Set a fixed size for consistency */
     border-radius: 50%; 
     overflow: hidden; /* Prevent image overflow */
-    overflow-x: hidden; /* Prevent content overflow */
-    overflow-y: hidden;
 }
 
 .profile-image img {
     width: 100%;
     height: 100%;
     object-fit: cover; 
-    overflow: hidden; /* Ensure no overflow */
 }
 
 /* Blend Effect */
@@ -61,13 +57,11 @@
 .profile-content {
     flex: 2; 
     background-color: transparent;
-    color: black;
+    color: white;
     font-style: italic;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Prevent overflow */
-    box-sizing: border-box; /* Ensure padding is included in dimensions */
 }
 
 /* Social Media Icons */
@@ -75,17 +69,15 @@
     margin-top: 20px;
     display: flex; 
     justify-content: center; 
-    gap: 40px; 
-    overflow: hidden; /* Prevent overflow */
+    gap: 50px; 
 }
 
 .social-icon {
-    background-color:black; 
+    background-color: black; 
     padding: 10px;
     border-radius: 50%; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, background-color 0.3s ease;
-    overflow: hidden; /* Prevent overflow */
 }
 
 .social-icon:hover {
@@ -95,7 +87,7 @@
 
 .social-icon a {
     text-decoration: none; 
-    color: black; 
+    color: #00b5a6; 
     font-size: 1.5rem; 
 }
 
@@ -103,24 +95,38 @@
     color: white; 
 }
 
+/* Content List */
+.project-list {
+    background-color: transparent; /* Transparent background for scrollable content */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional subtle shadow */
+    width: 80%; /* Width of the content box */
+    max-width: 800px; /* Maximum width for content */
+    height: 70%; /* Height of the scrollable content */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid layout */
+    gap: 20px; /* Space between grid items */
+    box-sizing: border-box; /* Prevent padding overflow */
+}
+
 /* Responsive Adjustments for Smaller Screens */
 @media (max-width: 900px) {
     .main-container {
         flex-direction: column; /* Stack elements vertically on smaller screens */
     }
-}
-
-@media (max-width: 600px) {
-    .main-container {
-        padding: 10px; /* Reduce padding for small screens */
-    }
 
     .profile-image {
-        width: 300px; /* Reduce profile image size */
-        height: 300px;
+        width: 200px; /* Reduce profile image size */
+        height: 200px;
     }
 
-    .social {
-        gap: 10px; /* Adjust gap between icons */
+    .project-list {
+        grid-template-columns: repeat(2, 1fr); /* Show 2 items per row on smaller screens */
     }
 }
+
+

@@ -47,6 +47,9 @@ header .top-nav {
 
 /* Styling for Name and Title Section */
 header .name-title {
+    border: #fff;
+    background-color: blue;
+    border-radius: 55PX;
     display: flex;
     flex-direction: row; /* Keeps Name and Title in a horizontal row */
     align-items: center; /* Vertically aligns the Name and Title */
@@ -92,7 +95,7 @@ header .dropdown-content {
     position: absolute;
     top: 100%; /* Position dropdown below button */
     left: 0;
-    background-color: rgb(40, 40, 40); /* Slightly lighter for better contrast */
+    background-color: transparent; /* Slightly lighter for better contrast */
     color: white;
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -110,10 +113,12 @@ header .dropdown-content button {
     width: 100%;
     box-sizing: border-box;
     cursor: pointer;
+    
 }
 
 header .dropdown-content button:hover {
-    background-color: green;
+    background-color: rgb(11, 18, 1);
+    
 }
 
 header .dropdown:hover .dropdown-content {

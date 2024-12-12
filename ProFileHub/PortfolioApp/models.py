@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 class PersonalInformation(models.Model):
     full_name = models.CharField(max_length=100)
@@ -22,17 +24,19 @@ class PersonalInformation(models.Model):
 
 
 class Skill(models.Model):
-    name = models.CharField(max_length=100)  
-    proficiency = models.IntegerField(default=0) 
-    created_at = models.DateTimeField(auto_now_add=True) 
-    updated_at = models.DateTimeField(auto_now=True)  
+    name = models.CharField(max_length=100)
+    proficiency = models.IntegerField(default=0)
+    picture = models.ImageField(upload_to='skill_pictures/', blank=True, null=True)  
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = "skills"
-        managed = True  
+        managed = True
 
     def __str__(self):
         return self.name
+
 
 
 class Education(models.Model):
@@ -56,7 +60,7 @@ class CV(models.Model):
     pdf = models.FileField(upload_to='cv_files/')  
 
     class Meta:
-        db_table = "cvs"
+        db_table = "cv"
         managed = True
 
     def __str__(self):
@@ -92,33 +96,83 @@ class AboutMe(models.Model):
         return "About Me"
 
 
+
 class Reference(models.Model):
-    name = models.CharField(max_length=100)
-    relationship = models.CharField(max_length=100)
-    email = models.EmailField(blank=True, null=True)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
-    organization = models.CharField(max_length=150, blank=True, null=True)
-    notes = models.TextField(blank=True, null=True)
+    name = models.CharField(max_length=100)  # Name of the reference
+    email = models.EmailField(blank=True, null=True)  # Email address
+    role = models.CharField(max_length=100, blank=True, null=True)  # Role of the reference
+    company = models.CharField(max_length=150, blank=True, null=True)  # Company name
+    picture = models.ImageField(upload_to="references_pictures/", blank=True, null=True)  # Picture associated with the reference
 
     class Meta:
-        db_table = "references"
+        db_table = "references_table"
         managed = True
 
     def __str__(self):
-        return f"{self.name} - {self.relationship}"
+        return f"{self.name} - {self.role} at {self.company}"
+
+
+class TechnicalSkill(models.Model):
+    """
+    Represents an individual technical skill with predefined categories and a skill level scale.
+    """
+    LIBRARIES_AND_FRAMEWORKS = 'Libraries and Frameworks'
+    DATA_SCIENCE_ANALYSIS = 'Data Science & Analysis'
+    PROGRAMMING_LANGUAGES = 'Programming Languages'
+    BACKEND_DEVELOPMENT = 'Backend Development'
+    FRONTEND_DEVELOPMENT = 'Frontend Development'
+    VERSION_CONTROL_TOOLS = 'Version Control & Tools'
+    DEVELOPMENT_PRACTICES = 'Development Practices'
+    OTHER = 'Other'
+
+    CATEGORY_CHOICES = [
+        (LIBRARIES_AND_FRAMEWORKS, LIBRARIES_AND_FRAMEWORKS),
+        (DATA_SCIENCE_ANALYSIS, DATA_SCIENCE_ANALYSIS),
+        (PROGRAMMING_LANGUAGES, PROGRAMMING_LANGUAGES),
+        (BACKEND_DEVELOPMENT, BACKEND_DEVELOPMENT),
+        (FRONTEND_DEVELOPMENT, FRONTEND_DEVELOPMENT),
+        (VERSION_CONTROL_TOOLS, VERSION_CONTROL_TOOLS),
+        (DEVELOPMENT_PRACTICES, DEVELOPMENT_PRACTICES),
+        (OTHER, OTHER),
+    ]
+
+    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    skill_level = models.PositiveIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(10)],
+        default=5,  # Default value for skill level
+        help_text="Skill level on a scale of 1 to 10"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "technical_skill"
+        managed = True
+        unique_together = ('category', 'name')  # Prevent duplicate skills in the same category
+
+    def __str__(self):
+        return f"{self.name} ({self.category}) - Level: {self.skill_level}"
     
 
 
 
-class ProfolioPolicy(models.Model):
-    name = models.CharField(max_length=100, unique=True)  
-    url = models.URLField(max_length=200)  
+
+class WebsitePolicy(models.Model):
+    """
+    Represents the terms of use and policies for the website.
+    """
+    terms_of_use = models.TextField()  # Field for the terms of use
+    policy_statement = models.TextField()  # Field for the policy statement
+    created_at = models.DateTimeField(auto_now_add=True)  # Timestamp for when the policy is created
+    updated_at = models.DateTimeField(auto_now=True)  # Timestamp for when the policy is updated
 
     class Meta:
-        managed = True  
-        db_table = 'profolio_policy' 
-        verbose_name = 'Profolio Policy'
-        verbose_name_plural = 'Profolio Policies'
+        db_table = "website_policy"
+        managed = True
 
     def __str__(self):
-        return self.name
+        return f"Website Policy (Created: {self.created_at})"
+
+
