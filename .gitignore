@@ -66,8 +66,8 @@ node_modules/
 *.yml
 
 # Ignore gitconfig.py file
-gitconfig.py
-settings.py
+
+
 
 #Ignore Google App Engin Congiguration 
 app.yaml
