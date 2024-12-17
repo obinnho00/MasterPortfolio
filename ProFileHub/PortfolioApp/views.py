@@ -1,25 +1,31 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.http import HttpRequest
-from .models import *
-from django.db import connection
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
+import os
+import re
+import sys
 import json
 import base64
 import requests
-import sys
-import os
-import re
 import markdown2
-from  django.utils.text import slugify
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, HttpRequest, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+from django.conf import settings
+from django.urls import reverse
+from django.db import connection
+
+from django.utils.text import slugify
+from django.utils import timezone
+from django.views import View
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 from PortfolioApp.gitconfig.gitconfig import GITHUB_API_URL, USERNAME, TOKEN
 
-
-from django.views import View
-from .models import AboutMe, Project, TechnicalSkill
-
+from .models import AboutMe, Project, TechnicalSkill, User, BugReport, Comment, CV
+from .forms import CommentForm
+from google.cloud import storage
+from datetime import timedelta, datetime
 
 
 class Home(View):
@@ -167,34 +173,32 @@ class SkillListView(View):
                 }
                 for row in cursor.fetchall()
             ]
-
-        context = {
-            'skills': skills
-        }
-        return render(request, self.template_name, context)
+        print(skills)  # Debug log
+        return JsonResponse({'Technical_skill': skills})  # Temporary for debugging
 
 
 
 class Technical_Skills(View):
-    def get(self, request):
-        query = "SELECT category, name, description, skill_level FROM technical_skill"
+    template_name = 'technical_skill.html'
+    def get(self, request, *args, **kwargs):
         with connection.cursor() as cursor:
-            cursor.execute(query)
+            cursor.execute("SELECT id, name, proficiency, created_at, updated_at, picture FROM skills")
             skills = [
                 {
-                    'category': row[0],
+                    'id': row[0],
                     'name': row[1],
-                    'description': row[2],
-                    'skill_level':row[3]
+                    'proficiency': row[2],
+                    'created_at': row[3],
+                    'updated_at': row[4],
+                    'picture': row[5],
                 }
                 for row in cursor.fetchall()
             ]
-
-        data = {
-            'skills': skills
-        }
-        return render(request, 'technical_skill.html', data)
-
+        
+       
+        context = {'Technical_skill': skills}  
+        return render(request, self.template_name, context)
+    
 
 class WebsitePolicyView(View):
     """
@@ -220,19 +224,191 @@ class WebsitePolicyView(View):
 
 
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 class ReferenceView(View):
     def get(self, request):
-        query = "SELECT name, email, company, role, picture FROM reference_table"
+        # Use raw SQL for fetching data (if required)
+        query = "SELECT name, email, company, role, picture FROM references_table"
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+                reference_data = [
+                    {
+                        "name": row[0],
+                        "email": row[1],
+                        "company": row[2],
+                        "role": row[3],
+                        "picture": row[4],
+    
+                    }
+                    for row in cursor.fetchall()
+                ]
+        except Exception as e:
+            # Log the error and provide fallback data
+            logger.error(f"Database query failed: {e}")
+            reference_data = []
+        #print(reference_data, flush=True)
+
+
+        return render(request, 'reference.html', {
+            'reference_data': json.dumps(reference_data)  # Serialize JSON properly
+        })
+    
+
+
+
+
+from django.utils.timezone import now, timedelta
+
+class BugReportsView(View):
+    template_name = 'bug_reports.html'
+
+    def get(self, request):
+        # Filter parameter from the GET request
+        date_filter = request.GET.get('date_filter')
+        filter_date = None
+
+        # Determine the date range
+        if date_filter == 'today':
+            filter_date = now().date()
+        elif date_filter == 'week':
+            filter_date = now() - timedelta(days=7)
+        elif date_filter == 'month':
+            filter_date = now() - timedelta(days=30)
+        elif date_filter == 'year':
+            filter_date = now() - timedelta(days=365)
+
+        # Raw SQL query with optional filtering
+        raw_query = """
+            SELECT 
+                u.id AS user_id, 
+                u.name AS user_name, 
+                u.email AS user_email, 
+                br.id AS report_id, 
+                br.bug_type, 
+                br.report,
+                br.solution,
+                br.posted_date
+            FROM "user" u
+            LEFT JOIN bug_report br ON u.id = br.user_id
+        """
+        if filter_date:
+            raw_query += " WHERE br.posted_date >= %s"
+            query_params = [filter_date]
+        else:
+            query_params = []
+
+        raw_query += " ORDER BY u.id, br.posted_date DESC;"
+
+        # Execute the query
         with connection.cursor() as cursor:
-            cursor.execute(query)
-            reference_data = [
-                {
-                    "name": row[0],
-                    "email": row[1],
-                    "company": row[2],
-                    "role": row[3],
-                    "picture": row[4],  # Ensure this stores the correct file path
+            cursor.execute(raw_query, query_params)
+            results = cursor.fetchall()
+
+        # Process results into structured data
+        users = {}
+        for row in results:
+            user_id = row[0]
+            user_name = row[1] if row[1] else None
+            user_email = row[2]
+            report_id = row[3]
+            bug_type = row[4]
+            report = row[5]
+            solution = row[6]
+            posted_date = row[7]
+
+            if user_id not in users:
+                users[user_id] = {
+                    'display_name': user_name if user_name else user_email,
+                    'bug_reports': []
                 }
-                for row in cursor.fetchall()
-            ]
-        return render(request, "reference.html", {'reference_data': reference_data, 'MEDIA_URL': settings.MEDIA_URL})
+
+            if report_id:  # Only add the report if it exists
+                comments = Comment.objects.filter(bug_report_id=report_id)
+                users[user_id]['bug_reports'].append({
+                    'id': report_id,
+                    'bug_type': bug_type,
+                    'report': report,
+                    'solution': solution,
+                    'posted_date': posted_date,
+                    'comments': comments
+                })
+
+        # Convert the dictionary to a list for rendering
+        user_list = list(users.values())
+        form = CommentForm()
+
+        return render(request, self.template_name, {'users': user_list, 'form': form})
+
+
+    #@method_decorator(login_required)
+    def post(self, request):
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            bug_report_id = request.POST.get('bug_report_id')
+            bug_report = get_object_or_404(BugReport, id=bug_report_id)
+            comment = form.save(commit=False)
+            # Assign user only if authenticated, else set to None
+            comment.user = request.user if request.user.is_authenticated else None
+            comment.bug_report = bug_report
+            comment.save()
+        return redirect('bug_reports')
+
+
+class PostBug(View):
+    template_name = 'Report-bug.html'
+
+    def get(self, request):
+        # Render the form for GET requests
+        return render(request, self.template_name)
+    
+
+    def post(self, request):
+        # Extract form data from POST request
+        email = request.POST.get('email')
+        name = request.POST.get('name', '').strip()
+        bug_type = request.POST.get('bug_type')
+        report = request.POST.get('report')
+        solution = request.POST.get('solution', '')
+
+        # Validate required fields
+        if not email or not bug_type or not report:
+            return JsonResponse({"error": "Email, Bug Type, and Report fields are required."}, status=400)
+
+        # Validate or create user by email
+        user, created = User.objects.get_or_create(email=email)
+        if created and name:  # Set the name for a new user
+            user.name = name
+            user.save()
+
+        # Create and save the BugReport instance
+        BugReport.objects.create(
+            user=user,
+            bug_type=bug_type,
+            report=report,
+            solution=solution if solution else None,
+            posted_date=now()
+        )
+
+        return redirect(reverse('bug_reports'))
+    
+from django.http import FileResponse, Http404
+
+class DownloadCVView(View):
+    def get(self, request):
+        try:
+            # Absolute path to the CV file in the static folder
+            file_path = os.path.join(
+                "PortfolioApp/static/PDF", "2025_CV.pdf"
+            )
+
+            # Fixed download filename
+            custom_filename = "Isaac-Obi-Arum-Cv.pdf"
+
+            # Open the file and serve it as a downloadable response
+            return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=custom_filename)
+        except FileNotFoundError:
+            raise Http404("CV not found")

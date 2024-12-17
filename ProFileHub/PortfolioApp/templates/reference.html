@@ -1,45 +1,26 @@
-{% extends "main-base.html" %}
+
 
 {% load static %}
 
 {% block title %}
-Skills
+Reference
+{% endblock %}
+
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'Css/References.css' %}">
 {% endblock %}
 
 {% block content %}
+<div class="container">
+    <!-- Main server element -->
+    <div class="server" id="server"></div>
 
-
-<div class="project-section">
-    <h1 class="section-title">Reference</h1>
-    <div class="project-list">
-        {% for reference in reference_data %}
-        <div class="project-item">
-
-            <!-- Reference Image -->
-            <div class="project-image">
-                <img src="{{ MEDIA_URL }}{{ reference.picture.Url }}" 
-                alt="{{ reference.name }}"
-                >
-
-
-
-            </div>
-
-            <!-- Reference Details -->
-
-            <div class="project-details">
-                <strong class="project-name">{{ reference.name  }}</strong><br>
-                <span class="commit-details">
-                    <strong>email:</strong> {{  reference.email }}<br>
-                    <strong>company:</strong> {{ reference.company }}<br>
-                    <strong>Role:</strong> {{ reference.role }}
-                </span><br>
-                
-            </div>
-        {% endfor %}
-    </div>
+    
 </div>
-<link rel="stylesheet" href="{% static 'Css/reference.css' %}">
-<script src="{% static 'js/progress.js' %}"></script>
-
+<script>
+    const references = JSON.parse('{{ reference_data|escapejs }}');
+</script>
+<script src="{% static 'js/References.js' %}"></script>
 {% endblock %}

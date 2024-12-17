@@ -238,3 +238,16 @@
     color: green; /* Match text color */
     text-decoration: underline; /* Underline the link */
 }
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 900px) {
+    .project-list {
+        grid-template-columns: repeat(2, 1fr); /* Show 2 items per row on smaller screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .project-list {
+        grid-template-columns: repeat(1, 1fr); /* Show 1 item per row on very small screens */
+    }
+}

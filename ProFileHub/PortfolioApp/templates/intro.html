@@ -1,26 +1,18 @@
 {% extends "main-base.html" %}
-
 {% load static %}
-
 {% block title %}
 Introduction
 {% endblock %}
-
 {% block content %}
-
 <div class="introduction">
+    <div class="H1">
+        <h1>Let me take you through a journey!</h1>
+    </div>
     <div class="introduction-content">
-        <div class="picture">
-            <img src="{% static 'images/photo.png' %}" alt="Your Profile" class="img-fluid">
-        </div>
-        <div class="H1">
-            <h1>Let me take you through a journey!</h1>
-        </div>
-        
         <div id="content">
             {% for item in content %}
             <div class="intro-item">
-                <p><strong></strong> {{ item.1 }}</p>
+                <p> {{ item.1 }}</p>
             </div>
             {% endfor %}
         </div>

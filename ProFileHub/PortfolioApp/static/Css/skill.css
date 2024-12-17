@@ -88,17 +88,17 @@
 .skill-name {
     font-size: 1.5rem;
     font-style: italic;
-    color:#00aaff;
+    color:#e3e3e3;
     margin-bottom: 5px; /* Space below the name */
 }
 
 /* Skill Description */
 .skill-description {
-    font-size: 9px;
+    font-size: 25px;
     text-align: center;
     font-weight: bold;
     font-style: italic;
-    color: #00aaff; /* Bright blue for contrast */
+    color: GREEN; /* Bright blue for contrast */
     margin-bottom: 20px; /* Space below the title */
     width: 100%; /* Ensure it spans across the section */
     z-index: 101; /* Make sure it appears above other content */

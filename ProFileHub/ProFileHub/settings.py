@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 
-school = set
+SECRET_KEY  = set
 
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['35.238.135.221', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -94,11 +94,11 @@ CRISPY_TEMPLATE_PACK = "bootstrap5",
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'portfoliodatabase',
-        'USER': 'obi',
+        'NAME': 'Portfolio_Database_Management',
+        'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST':'localhost',
-        'port':'5432',
+        'HOST':'35.238.135.221',
+        'PORT':'5432',
     }
 }
 
@@ -144,7 +144,19 @@ STATICFILES_DIRS = [
 ]
 
 
+# Google Cloud Storage Configuration
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = 'cloudcv'
+
+# Credentials File
+GS_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+
+# Media Settings
+MEDIA_URL = f'https://storage.googleapis.com/cloudcv/'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

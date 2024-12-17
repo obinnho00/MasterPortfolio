@@ -11,27 +11,25 @@ Skills
 <div class="skill-section">
     <h1 class="section-title">Technical Skills</h1>
     <div class="skill-list">
-        {% for skill in skills %}
-        <div class="skill-item">
-            <!-- Skill Details -->
-            <strong class="skill-name">{{ skill.name }}</strong>
-            <p class="skill-description">{{ skill.category }}</p>
-            <!-- Progress Bar -->
-            <div class="progress">
-                <div 
-                    class="progress-bar" 
-                    role="progressbar" 
-                    data-skill-level="{{ skill.skill_level }}" 
-                    aria-valuenow="{{ skill.skill_level }}" 
-                    aria-valuemin="0" 
-                    aria-valuemax="10">
-                    {{ skill.skill_level }}/10
-                </div>
+    {% for skill in Technical_skill %}
+    <div class="skill-item">
+        <strong class="skill-name">{{ skill.name }}</strong>
+        <p class="skill-description">{{ skill.proficiency }} %</p>
+        <div class="progress">
+            <div 
+                class="progress-bar" 
+                role="progressbar" 
+                data-skill-level="{{ skill.proficiency }}" 
+                aria-valuenow="{{ skill.proficiency }}" 
+                aria-valuemin="0" 
+                aria-valuemax="10">
+                
             </div>
         </div>
-        {% empty %}
-        <p>No technical skills found.</p>
-        {% endfor %}
+    </div>
+    {% empty %}
+    <p>No technical skills found.</p>
+    {% endfor %}
     </div>
 </div>
 

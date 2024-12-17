@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #2B78A5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            margin: auto;
+        }
+
+        .server {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(10deg) rotateY(10deg);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: url('/static/images/photo.png') no-repeat center;
+            background-size: cover;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 -4px 6px rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 10;
+        }
+
+        .server:hover {
+            transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) scale(1.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6), 0 -8px 10px rgba(255, 255, 255, 0.4);
+        }
+
+        .user {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: url('/static/images/imoji.jpg') no-repeat center;
+            background-size: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 -4px 6px rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .user:hover {
+            transform: scale(1.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), 0 -6px 12px rgba(255, 255, 255, 0.4);
+        }
+
+        .line {
+            position: absolute;
+            background-color: blue;
+            width: 2px;
+            transform-origin: top left;
+            z-index: 1;
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            display: none;
+            z-index: 20;
+            min-width: 280px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 -4px 6px rgba(255, 255, 255, 0.3);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            max-width: 900px;
+            text-align: left;
+            line-height: 1;
+
+            box-sizing: border-box;
+            /* Include padding in width calculations */
+            white-space: normal;
+
+
+
+        }
+
+        .tooltip img {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            overflow: hidden;
+        }
+
+        .tooltip-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
+        .tooltip-content strong {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="server" id="server"></div>
+    </div>
+
+    <script>
+        const container = document.querySelector('.container');
+        const centerX = container.offsetWidth / 2;
+        const centerY = container.offsetHeight / 2;
+        const radius = 350;
+
+        const references = JSON.parse('{{ reference_data|escapejs }}');
+        console.log('Parsed References:', references);
+
+        const tooltips = []; // Store all tooltips for toggling
+
+        // Create users, tooltips, and lines
+        references.forEach((user, index) => {
+            const angle = (index / references.length) * 2 * Math.PI;
+            const x = centerX + radius * Math.cos(angle) - 35;
+            const y = centerY + radius * Math.sin(angle) - 35;
+
+            // User icon
+            const userDiv = document.createElement('div');
+            userDiv.classList.add('user');
+            userDiv.style.left = `${x}px`;
+            userDiv.style.top = `${y}px`;
+
+            // Tooltip
+            const tooltip = document.createElement('div');
+            tooltip.classList.add('tooltip');
+            tooltip.style.display = 'none'; // Initially hidden
+            tooltip.innerHTML = `
+        <img src="/static/images/imoji.jpg" alt="User Image">
+        <div class="tooltip-content">
+            <strong>${user.name}</strong>
+            Email: ${user.email}<br>
+            Company: ${user.company}<br>
+            Role: ${user.role}
+        </div>
+    `;
+
+            tooltip.style.left = `${x}px`;
+            tooltip.style.top = `${y - 90}px`;
+
+            container.appendChild(tooltip);
+            tooltips.push(tooltip);
+
+            // Show tooltip on hover
+            userDiv.addEventListener('mouseenter', () => tooltip.style.display = 'flex');
+            userDiv.addEventListener('mouseleave', () => tooltip.style.display = 'none');
+
+            container.appendChild(userDiv);
+
+            // Line from center to user
+            const line = document.createElement('div');
+            line.classList.add('line');
+            const deltaX = x + 35 - centerX;
+            const deltaY = y + 35 - centerY;
+            const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            const angleDeg = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+
+            line.style.height = `${length}px`;
+            line.style.left = `${centerX}px`;
+            line.style.top = `${centerY}px`;
+            line.style.transform = `rotate(${angleDeg}deg)`;
+
+            container.appendChild(line);
+        });
+
+        // Middle server click toggle functionality
+        const server = document.getElementById('server');
+        let tooltipsVisible = false;
+
+        server.addEventListener('click', () => {
+            tooltipsVisible = !tooltipsVisible;
+
+            // Show or hide all tooltips
+            tooltips.forEach(tooltip => {
+                tooltip.style.display = tooltipsVisible ? 'flex' : 'none';
+            });
+        });
+
+    </script>
+</body>
+
+</html>

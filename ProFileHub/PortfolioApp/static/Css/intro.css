@@ -5,73 +5,51 @@ body, html {
     width: 100%; /* Ensure the full width of the viewport */
     height: 100%; /* Ensure the full height of the viewport */
     overflow: hidden; /* Prevent scrolling, if needed */
-    margin-bottom: 55%;
+    
 }
 
 /* Main stationary container */
 .introduction {
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: flex-start; /* Align content from the top */
     align-items: center;
-    position: fixed; /* Keeps the main container stationary */
-    top: 0;
+    position: absolute; /* Position relative to the parent container */
+    top: auto; /* Allow positioning below the header */
     left: 0;
-    width: 100vw; /* Full width of the viewport, accounting for any potential issues */
-    height: 100vh; /* Full height of the viewport */
-    background-color: rgba(0, 0, 0, 0.8); /* Optional: Add a semi-transparent background */
-    z-index: 1; /* Ensures it stays above other elements */
+    width: 100vw; /* Full width of the viewport */
+    height: auto; /* Adjust height based on content */
+    margin-top: 100px; /* Adjust to create space below the header */
+    background-color: transparent; /* Optional: Add a semi-transparent background */
+    z-index: 10; /* Ensures it stays above other elements */
 }
 
-/* Inner content */
-.introduction-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%; /* Inner container spans full width */
-    max-width: 1200px; /* Optional: limit the maximum width */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margins */
-    color: white;
-    height: auto; /* Content adapts to its content height */
-}
+/* Header (Stationary H1) */
 .H1 {
     text-align: center;
     font-style: italic;
-    
-}
-
-/* Profile Image */
-.picture {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.picture img {
-    width: 150px; /* Adjust the width of the image */
-    height: 150px; /* Adjust the height of the image */
-    border-radius: 50%; /* Ensures the image remains circular */
-    object-fit: cover; /* Ensures the image scales and crops proportionally */
-     /* Optional: Add a border around the image */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Optional: Add a subtle shadow */
-}
-
-
-/* Scrollable content within the stationary container */
-.introduction-content {
-    background-color: transparent; /* White background for the scrollable content */
     color: white;
-    font-weight: bold;
-    padding: 20px;
-    border-radius: 10px;
+    position: fixed; /* Fix it to the top of the viewport */
+    top: 100px; /* Adjust to the desired position below the picture */
+    left: 0;
+    right: 0;
+    z-index: 2; /* Ensures it stays above scrollable content */
+    margin-bottom: 10px;
+    font-size: 100px;
+    background-color:transparent;
+    width: 100vw; /* Full width of the viewport */
+}
+
+/* Scrollable content below the stationary elements */
+.introduction-content {
+    background-color: transparent; /* Transparent background for the scrollable content */
+    color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%; /* Width of the content box */
-    max-width: 800px; /* Maximum width to keep content manageable */
-    height: 70%; /* Adjustable height of the scrollable content */
+    width: 100vw; /* Width of the content box */
+    height: calc(100vh - 200px); /* Adjust height to fit below the header */
     overflow-y: auto; /* Enables vertical scrolling */
     overflow-x: hidden; /* Prevents horizontal scrolling */
+    margin-top: 20px; /* Space below the stationary header and picture */
 }
 
 /* Items inside the scrollable content */
@@ -81,8 +59,8 @@ body, html {
     background-color: transparent;
     border: 1px transparent;
     border-radius: 5px;
-    gap:10%;
-    
+    gap: 40%;
+    width: 100%; /* Take full width of the content box */
 }
 
 .intro-item p {
@@ -90,19 +68,30 @@ body, html {
     font-size: 1rem;
     line-height: 1.5;
     font-style: italic;
+    width: 100%; /* Ensure the paragraph takes the full width of the container */
 }
 
-/* Optional: Make scrollbar visually appealing */
-.introduction-content::-webkit-scrollbar {
-    width: 0px;
-    
-}
 
+/* Scrollbar styling */
 .introduction-content::-webkit-scrollbar-thumb {
     background-color: #888;
-    border-radius: 0px;
+    border-radius: 4px;
 }
 
 .introduction-content::-webkit-scrollbar-thumb:hover {
     background-color: #555;
+}
+
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 900px) {
+    .project-list {
+        grid-template-columns: repeat(2, 1fr); /* Show 2 items per row on smaller screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .project-list {
+        grid-template-columns: repeat(1, 1fr); /* Show 1 item per row on very small screens */
+    }
 }

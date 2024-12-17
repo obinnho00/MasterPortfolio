@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator,EmailValidator
 
 
 class PersonalInformation(models.Model):
@@ -57,14 +57,16 @@ class Education(models.Model):
 
 
 class CV(models.Model):
-    pdf = models.FileField(upload_to='cv_files/')  
+    name = models.CharField(max_length=100, default="Isaac Obi Cv") 
+    file = models.BinaryField() 
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = "cv"
         managed = True
 
     def __str__(self):
-        return f"CV ({self.pdf.name})"
+        return f"CV ({self.file})"
 
 
 class Project(models.Model):
@@ -86,7 +88,6 @@ class Project(models.Model):
 
 class AboutMe(models.Model):
     introduction = models.TextField()  
-    fun_interests = models.TextField()  
 
     class Meta:
         db_table = "about_me"
@@ -158,7 +159,7 @@ class TechnicalSkill(models.Model):
 
 
 
-
+# need attention 
 class WebsitePolicy(models.Model):
     """
     Represents the terms of use and policies for the website.
@@ -176,3 +177,53 @@ class WebsitePolicy(models.Model):
         return f"Website Policy (Created: {self.created_at})"
 
 
+
+class User(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(validators=[EmailValidator()], unique=True)
+
+    class Meta:
+        db_table = 'user'
+        managed = True
+        verbose_name = "User"
+        verbose_name_plural = "Users"
+
+    def __str__(self):
+        return self.name
+
+
+class BugReport(models.Model):
+    posted_date = models.DateTimeField(auto_now_add=True)
+    bug_type = models.CharField(max_length=50)
+    report = models.TextField()
+    solution = models.TextField(null=True, blank=True)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='bug_reports'
+    )
+
+    class Meta:
+        db_table = 'bug_report'
+        managed = True
+        verbose_name = "Bug Report"
+        verbose_name_plural = "Bug Reports"
+
+    def __str__(self):
+        return f"{self.bug_type} reported by {self.user.email}, {self.solution} on {self.posted_date}"
+
+
+class Comment(models.Model):
+    bug_report = models.ForeignKey(BugReport, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    content = models.TextField()
+    posted_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'comment'
+        managed = True
+        verbose_name = "Comment"
+        verbose_name_plural = "Comments"
+
+    def __str__(self):
+        return f"Comment by {self.user.email} on {self.bug_report}"
