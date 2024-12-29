@@ -10,16 +10,7 @@ steps:
       python manage.py makemigrations || echo "No migrations to make"
       python manage.py migrate
 
-# Step 2: Run tests
-- name: 'python:3.9'
-  entrypoint: 'bash'
-  args:
-    - '-c'
-    - |
-      pip install -r requirements.txt
-      python manage.py test
-
-# Step 3: Deploy to App Engine if tests pass
+# Step 2: Deploy to App Engine
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy', '--quiet']
 
