@@ -139,9 +139,14 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "PortfolioApp/static"),  # Dynamically resolve the absolute path
 ]
+
+# Define STATIC_ROOT for collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 
 
 # Google Cloud Storage Configuration
