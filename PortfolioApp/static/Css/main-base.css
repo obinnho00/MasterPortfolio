@@ -1,0 +1,300 @@
+/* Full Page Styling */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Prevent scrolling outside the container */
+
+    background: linear-gradient(135deg, #333434, #2a5298);
+    /* Gradient background */
+    box-shadow: inset 0 0 15px rgba(101, 78, 78, 0.5);
+    /* Shadow for depth */
+
+    /* Adding a 3D effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    perspective: 1500px;
+    perspective-origin: center;
+}
+
+body::before, body::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.8));
+    transform: translate(-50%, -50%) rotateX(30deg) rotateY(25deg);
+    box-shadow: 0px 25px 50px rgba(0, 0, 0, 0.8);
+    z-index: -1;
+    animation: rotate3D 10s infinite ease-in-out alternate;
+}
+
+body::after {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.9));
+    transform: translate(-50%, -50%) rotateX(-30deg) rotateY(-25deg);
+    animation: rotate3DAlt 5s infinite ease-in-out alternate;
+}
+
+/* Floating Layers */
+body::before {
+    animation: float 10s infinite ease-in-out alternate-reverse, rotate3D 30s infinite linear;
+}
+
+@keyframes rotate3D {
+    0% {
+        transform: translate(-50%, -50%) rotateX(30deg) rotateY(25deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotateX(-20deg) rotateY(-15deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotateX(30deg) rotateY(25deg);
+    }
+}
+
+@keyframes rotate3DAlt {
+    0% {
+        transform: translate(-50%, -50%) rotateX(-30deg) rotateY(-25deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotateX(20deg) rotateY(15deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotateX(-30deg) rotateY(-25deg);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translate(-50%, -50%) scale(1.02);
+        filter: blur(2px);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(0.98);
+        filter: blur(3px);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.02);
+        filter: blur(2px);
+    }
+}
+
+/* Add a third layer for more depth */
+body::before:nth-child(3) {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 130%;
+    height: 130%;
+    background: radial-gradient(circle, rgba(50, 50, 50, 0.1), rgba(0, 0, 0, 0.7));
+    transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg);
+    animation: rotateLayer3 10s infinite linear alternate;
+}
+
+@keyframes rotateLayer3 {
+    0% {
+        transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotateX(-10deg) rotateY(-10deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg);
+    }
+}
+/* Add a $4th layer for more depth */
+body::before:nth-child(4) {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 130%;
+    height: 130%;
+    background: radial-gradient(circle, rgba(3, 14, 88, 0.1), rgba(91, 9, 9, 0.7));
+    transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg);
+    animation: rotateLayer3 1s infinite linear alternate;
+}
+
+@keyframes rotateLayer3 {
+    0% {
+        transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotateX(-10deg) rotateY(-10deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg);
+    }
+}
+
+
+
+
+.custom-navigation {
+    background: linear-gradient(135deg, #333434, #2a5298);
+    width: 100;
+    position: fixed;
+    /* Keeps the header always at the top */
+    top: 0;
+    /* Sticks it to the top of the viewport */
+    left: 0;
+    width: 100%;
+    z-index: 900000;
+}
+
+/* Custom Navbar Brand */
+.top-nave-Name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: green;
+    border-radius: 55px;
+    
+}
+
+.top-nave-Name:hover {
+    color: black;
+
+}
+
+.top-nav-title {
+    font-style: italic;
+    color: green;
+    font-size: 1.5rem;
+}
+
+/* Custom Button Styles */
+.chart-button {
+    background-color: transparent;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: transparent;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.chart-icon {
+    color: #218838;
+
+}
+
+.chart-button:hover {
+    background-color: rgb(76, 76, 76);
+    color: #bfd1e3;
+    border-color: #b6bcc2;
+}
+
+.intro-button {
+    background-color: transparent;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: transparent;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.intro-button:hover {
+    background-color: rgb(76, 76, 76);
+    color: #bfd1e3;
+    border-color: #b6bcc2;
+}
+
+.project-button {
+    background-color: transparent;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: transparent;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.drop-down-item {
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: transparent;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.project-menue {
+
+    background-color: lightslategray;
+    color: black;
+    border-radius: 25px;
+    padding: 10px 20px;
+    border: black;
+    transition: all 0.1s ease-in-out;
+
+}
+
+.project-button:hover {
+    background-color: linear-gradient(135deg, #333434, #2a5298);
+    color: #bfd1e3;
+    border-color: #b6bcc2;
+}
+
+.cv-button {
+    background-color: transparent;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border:transparent;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.skill-button {
+    background-color: transparent;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: transparent;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.skill-button:hover,
+.cv-button:hover {
+    background-color:rgb(76, 76, 76);
+    color: #bfd1e3;
+    border-color: #b6bcc2;
+}
+
+
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: linear-gradient(135deg, #333434, #2a5298);
+
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+    footer {
+        padding: 15px 10px;
+    }
+
+    footer .footer-links {
+        margin-top: 5px;
+    }
+
+    footer .footer-links a {
+        margin: 0 5px;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,98 @@
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Main Container for Skills Section */
+.skill-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: transparent;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Skill List Grid */
+.skill-list {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Individual Skill Item */
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #333434, #2a5298); 
+    color: white;
+    border-radius: 8px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5), 
+                -4px -4px 8px rgba(255, 255, 255, 0.1); 
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.skill-item:hover {
+    transform: scale(1.05) rotateX(5deg) rotateY(5deg); 
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6), 
+                -10px -10px 20px rgba(255, 255, 255, 0.2); 
+    background: linear-gradient(135deg, #2a5298, #333434); 
+}
+
+/* Skill Name Styling */
+.skill-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #e3e3e3;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+}
+
+/* Skill Description Styling */
+.skill-description {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: green;
+}
+
+/* Progress Bar Container */
+.progress {
+    width: 80%;
+    background-color: #333;
+    border-radius: 10px;
+    height: 10px;
+    overflow: hidden;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.6), 
+                inset -2px -2px 5px rgba(255, 255, 255, 0.1); 
+}
+
+/* Progress Bar Fill */
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(135deg, #4caf50, #087f23); 
+    width: 0; 
+    transition: width 2s ease; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); 
+}
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 900px) {
+    .skill-list {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .skill-list {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}

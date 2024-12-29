@@ -1,0 +1,30 @@
+{% extends "main-base.html" %}
+{% load static %}
+{% block title %}
+Introduction
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'Css/intro.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="introduction">
+    <div class="H1">
+        <h1>Let me take you through a journey!</h1>
+    </div>
+    <div class="introduction-content">
+        <div id="content">
+            {% for item in content %}
+            <div class="intro-item">
+                <p> {{ item.1 }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/intro_content.js' %}"></script>
+{% endblock %}

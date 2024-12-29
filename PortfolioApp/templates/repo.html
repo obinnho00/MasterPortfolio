@@ -1,0 +1,49 @@
+{% extends "main-base.html" %}
+
+{% load static %}
+
+{% block title %}
+Current GitHub Projects
+{% endblock %}
+
+{% block content %}
+
+<div class="project-section">
+    <h1 class="section-title">Current Projects</h1>
+    
+    <div class="project-list">
+        {% for repo in repositories %}
+        <div class="project-item">
+            <!-- Default Image for All Repositories -->
+            <div class="project-image">
+                <img 
+                    src="{% static repo.image_url %}" 
+                    alt="Default Image" 
+                    class="img-fluid"
+                >
+            </div>
+
+            <!-- Repository Content -->
+            <div class="project-details">
+                <strong class="project-name">{{ repo.repo_name }}</strong><br>
+                <span class="commit-details">
+                    <strong>Latest Commit:</strong> {{ repo.latest_commit.message }}<br>
+                    <strong>Author Name:</strong> {{ repo.latest_commit.author }}<br>
+                    <strong>Date of commit:</strong> {{ repo.latest_commit.date }}
+                </span><br>
+                <a href="{{ repo.latest_commit.url }}" class="commit-link">View Commit</a><br>
+                <h3>Overview</h3>
+                <div class="readme-content">{{ repo.readme|safe }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Include CSS and JavaScript -->
+<script src="{% static 'js/current_project.js' %}"></script>
+<script src="{% static 'js/intro_content.js' %}"></script>
+<link rel="stylesheet" href="{% static 'Css/repo.css' %}">
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "main-base.html" %}
+
+{% load static %}
+
+{% block title %}
+Skills
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'Css/skill.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="skill-section">
+    <div class="skill-list">
+        {% for skill in Technical_skill %}
+        <div class="skill-item">
+            <strong class="skill-name">{{ skill.name }}</strong>
+            <p class="skill-description">{{ skill.proficiency }} %</p>
+            <div class="progress">
+                <div 
+                    class="progress-bar" 
+                    role="progressbar" 
+                    data-skill-level="{{ skill.proficiency }}" 
+                    aria-valuenow="{{ skill.proficiency }}" 
+                    aria-valuemin="0" 
+                    aria-valuemax="100"
+                    style="width: {{ skill.proficiency }}%;"></div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No technical skills found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/progress.js' %}"></script>
+{% endblock %}

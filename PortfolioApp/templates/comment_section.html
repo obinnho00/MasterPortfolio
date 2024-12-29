@@ -1,0 +1,86 @@
+{% extends "main-base.html" %}
+
+{% load static %}
+
+{% block title %}
+Bug Reports
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'Css/comment_section.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-5 bug-reports-page">
+    <div id="fixed-bug-reports-header" class="bug-reports-header">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <!-- Filter Form -->
+            <form method="GET" action="" class="filter-form d-flex align-items-center gap-2">
+                <label for="date_filter" class="form-label mb-0">Filter by Date:</label>
+                <select name="date_filter" id="date_filter" class="form-select">
+                    <option value="">All</option>
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="year">This Year</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bug Reports Grid -->
+    <div id="bugReportsGrid" class="row g-5 justify-content-center">
+        {% for user in users %}
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5>{{ user.email }}</h5>
+                </div>
+                <div class="card-body">
+                    {% for report in user.bug_reports %}
+                    <div class="mb-4">
+                        <p><strong>Report:</strong> {{ report.report }}</p>
+                        <p><strong>Solution:</strong> {{ report.solution|default:"Not Posted" }}</p>
+                        <p><small>Posted on: {{ report.posted_date }}</small></p>
+                        <h6>Comments:</h6>
+                        <ul class="list-group mb-3">
+                            {% for comment in report.comments %}
+                            <li class="list-group-item">
+                                {{ comment.content }}
+                                <small class="text-muted">By {{ comment.user.email|default:"Anonymous" }} on {{
+                                    comment.posted_date }}</small>
+                            </li>
+                            {% endfor %}
+                            {% if not report.comments %}
+                            <li class="list-group-item">No comments yet.</li>
+                            {% endif %}
+                        </ul>
+                        <div class="comments-section">
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <div class="mb-2">
+                                    <textarea name="content" class="form-control" rows="2"
+                                        placeholder="Add your comment..." required></textarea>
+                                    <input type="hidden" name="bug_report_id" value="{{ report.id }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">Submit Comment</button>
+                            </form>
+                        </div>
+                        <hr>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/comment_section.js' %}"></script>
+<script src="{% static 'js/screen_resize.js' %}"></script>
+
+{% endblock %}

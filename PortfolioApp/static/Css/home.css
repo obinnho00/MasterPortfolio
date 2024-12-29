@@ -1,0 +1,158 @@
+
+/* Main Stationary Container */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    
+    z-index: 10;
+    box-sizing: border-box; 
+    overflow: hidden; 
+}
+
+
+
+/* Profile Image */
+.profile-image {
+    position: relative; 
+    display: inline-block; 
+    width: 300px; 
+    height: 300px; 
+    border-radius: 50%; 
+    overflow: hidden; 
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+/* Blend Effect */
+.profile-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; 
+    background: radial-gradient(circle, transparent 70%, rgba(0, 0, 0, 0.5) 100%);
+    pointer-events: none; 
+}
+
+/* Profile Content */
+.profile-content {
+    flex: 2;
+    background-color: transparent;
+    color: white;
+    font-style: italic;
+    padding: 20px;
+    border-radius: 55px;
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1), 
+        0 8px 12px rgba(0, 0, 0, 0.2); 
+    transform-style: preserve-3d;
+    perspective: 800px;
+    transform: translateZ(0) rotateX(4deg) rotateY(-4deg);
+    animation: contentFloat 8s ease-in-out infinite;
+    position: relative;
+}
+
+/* Adding a pseudo-element for layered 3D depth */
+.profile-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.3));
+    transform: translateZ(-10px);
+    z-index: -1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Floating 3D animation */
+@keyframes contentFloat {
+    0%, 100% {
+        transform: translateZ(0) rotateX(4deg) rotateY(-4deg);
+    }
+    50% {
+        transform: translateZ(5px) rotateX(-3deg) rotateY(3deg);
+    }
+}
+
+
+/* Social Media Icons */
+.social {
+    margin-top: 20px;
+    display: flex; 
+    justify-content: center; 
+    gap: 50px; 
+}
+
+.social-icon {
+    background-color: black; 
+    padding: 10px;
+    border-radius: 50%; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.1); 
+    background-color: black; 
+}
+
+.social-icon a {
+    text-decoration: none; 
+    color: #00b5a6; 
+    font-size: 1.5rem; 
+}
+
+.social-icon a:hover {
+    color: white; 
+}
+
+/* Content List */
+.project-list {
+    background-color: transparent; 
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    width: 80%; 
+    max-width: 800px; 
+    height: 70%; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 20px; 
+    box-sizing: border-box; 
+}
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 900px) {
+    .main-container {
+        flex-direction: column; 
+    }
+
+    .profile-image {
+        width: 200px; 
+        height: 200px;
+    }
+
+    .project-list {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+

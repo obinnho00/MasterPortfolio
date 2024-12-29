@@ -1,0 +1,170 @@
+.project-table-container {
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: transparent;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.current-page {
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: linear-gradient(135deg, #274b4b, #282e37);
+    margin-top: 20px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.welcome-message {
+    text-align: center !important;
+    margin-bottom: 20px !important;
+    padding: 1px !important;
+    background-color: transparent;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important;
+    margin-top: 60px;
+    width: 100%;
+    z-index: 400;
+}
+
+.welcome-message p {
+    font-family: 'Arial', sans-serif !important;
+    font-size: 1rem !important;
+    color: white;
+    line-height: 1 !important;
+    z-index: 400;
+}
+
+.welcome-message a {
+    color: green;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    z-index: 400;
+}
+
+.welcome-message a:hover {
+    text-decoration: underline !important;
+}
+
+#projectsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    background-color: transparent;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.project-table-container {
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: transparent;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.projects-page .card {
+    border: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: transparent;
+    padding: 10px;
+    width: calc(33.33% - 40px);
+    max-width: 400px;
+    box-sizing: border-box;
+    color: white;
+}
+
+.projects-page .card-body {
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.projects-page .card-body p {
+    margin-bottom: 8px;
+    line-height: 1.4;
+    color: white;
+}
+
+.project-card .card-header {
+    background-color: transparent !important;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.projects-page .card-body a.btn {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    color: white;
+    border: 1px solid white;
+}
+
+.projects-page .card-body a.btn-primary {
+    background-color: transparent;
+    border-color: white;
+    color: white;
+}
+
+.projects-page .card-body a.btn-primary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.projects-page .card-body a.btn-secondary {
+    background-color: transparent;
+    border-color: white;
+    color: white;
+}
+
+.projects-page .card-body a.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.project-card {
+    background: linear-gradient(135deg, #333434, #2a5298);
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5), -4px -4px 8px rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateY(-2px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 20px;
+}
+
+.project-card:hover {
+    background: linear-gradient(135deg, #333434, #2a5298);
+    transform: translateY(-8px);
+    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.6), -6px -6px 12px rgba(255, 255, 255, 0.2);
+}

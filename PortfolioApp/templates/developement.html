@@ -1,0 +1,37 @@
+{% extends "main-base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Development and Testing
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'Css/developement.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="loading-circle"></div>
+        <div class="message">
+            Hi,<br>
+            This page is currently under development and testing.<br>
+            I'm working to improve it and make it even better for you.<br></br>
+    
+            
+            Once the page is fully operational, you'll be able to:<br>
+            Submit detailed bug reports, including descriptions and attachments.<br>
+            View a dynamic feed of bug reports from other users in a Reddit-style layout.<br>
+            Add comments to existing bug reports and participate in threaded discussions.<br>
+            Upvote or downvote reports and comments to prioritize key issues.<br>
+            Receive real-time updates as new reports and comments are added.<br>
+            Enjoy notifications for updates on your reports or comments.<br><br>
+        
+            I am building a robust, interactive platform to ensure a seamless experience for all users. Stay tuned!
+        </div>
+        
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "main-base.html" %}
+
+{% load static %}
+
+{% block title %}
+Issues
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'Css/Report-bug.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="custom-contaner-body report-bug-page">
+    <div class="container">
+        <div class="form-container">
+            <!-- Heading and Icon -->
+            <div class="d-flex flex-column justify-content-center align-items-center mb-4">
+                <img src="{% static 'images/bug.png' %}" alt="Bug Icon" class="rounded-img mb-2">
+                <h2 class="mb-2 text-center">Issues</h2>
+            </div>
+
+            <!-- Bug Report Form -->
+            <form method="POST" action="">
+                {% csrf_token %}
+
+                <!-- Email Field -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email (required)</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    <small class="text-muted">This field is required to manage and identify your bug reports.</small>
+                </div>
+
+                <!-- Name Field -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name (optional)</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name (optional)">
+                </div>
+
+                <!-- Bug Type Dropdown -->
+                <div class="mb-3">
+                    <label for="bug_type" class="form-label">Bug Type (required)</label>
+                    <select name="bug_type" id="bug_type" class="form-select" required>
+                        <option value="" disabled selected>Select the type of bug</option>
+                        <option value="download_cv">Issue with downloading CV</option>
+                        <option value="report_bug">Bug in reporting functionality</option>
+                        <option value="add_comment">Unable to add a comment</option>
+                        <option value="comment_on_posts">Error while commenting on posts</option>
+                        <option value="view_github_activities">Problem displaying GitHub activities</option>
+                        <option value="project_references">Issues with project references</option>
+                        <option value="navigation_menu">Bug in navigation menu</option>
+                        <option value="site_responsiveness">Site is not responsive on mobile</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <small class="text-muted">Select the bug type that best matches your issue or choose "Other" to specify.</small>
+                </div>
+
+                <!-- Custom Bug Type Input -->
+                <div class="mb-3" id="custom-bug-type-container" style="display: none;">
+                    <label for="custom_bug_type" class="form-label">Custom Bug Type</label>
+                    <input type="text" name="custom_bug_type" id="custom_bug_type" class="form-control" placeholder="Describe your bug type">
+                </div>
+
+                <!-- Report -->
+                <div class="mb-3">
+                    <label for="report" class="form-label">Report (required)</label>
+                    <textarea name="report" id="report" class="form-control" rows="4" placeholder="Describe the bug" required></textarea>
+                </div>
+
+                <!-- Solution (optional) -->
+                <div class="mb-3">
+                    <label for="solution" class="form-label">Solution (optional)</label>
+                    <textarea name="solution" id="solution" class="form-control" rows="3" placeholder="Suggested solution (if any)"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-submit">Submit Bug Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

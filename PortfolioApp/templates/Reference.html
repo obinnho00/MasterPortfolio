@@ -1,0 +1,40 @@
+{% extends "main-base.html" %}
+
+{% load static %}
+
+{% block title %}
+References
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'Css/References.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="main-references-body">
+    <div class="references-page">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+                {% for contact in contacts %}
+                <div class="col">
+                    <div class="card text-center">
+                        <img src="{% static 'images/bug.png' %}" alt="Profile Image" class="References-image mx-auto mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ contact.name }}</h5>
+                            <p class="card-text">{{ contact.company }}</p>
+                            <p class="card-text">{{ contact.role }}</p>
+                            <a href="mailto:{{ contact.email }}" class="email-button btn btn-primary btn-sm">Email</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "main-base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    <div class="main-container">
+        <div class="profile-content">
+            <h1>--Hello I'm Obi,</h1>
+            <h2>ECU</h2>
+            <p>
+                As a Master's student in Software Engineering, I am deeply passionate about artificial intelligence and innovative problem-solving. My focus lies in building scalable software solutions and advancing machine learning research. Thriving in collaborative environments, I aim to make a meaningful impact in the tech industry.
+                <a href="{% url 'intro' %}" title="Learn more about me">Learn more</a>.
+            </p>
+            <h3>Full Stack Developer</h3>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-image">
+                <img src="{% static 'images/photo.png' %}" alt="Your Profile" class="img-fluid">
+            </div>
+
+            <div class="social">
+                <div class="social-icon">
+                    <a href="https://www.linkedin.com/in/isaac-arum/" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+                <div class="social-icon">
+                    <a href="https://github.com/obinnho00" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <div class="social-icon">
+                    <a href="https://twitter.com" target="_blank" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+                <div class="social-icon">
+                    <a href="mailto:arumi21@students.ecu.edu" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_css %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/intro_content.js' %}"></script>
+{% endblock %}

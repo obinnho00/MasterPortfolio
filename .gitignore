@@ -1,0 +1,75 @@
+# Ignore Python compiled files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore virtual environment
+mywebsite/
+
+# Ignore environment variables and secrets
+.env
+*.env
+
+# Ignore PostgreSQL database dumps
+*.sql
+*.dump
+*.backup
+
+# Ignore logs and temp files
+*.log
+*.pot
+*.py~
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db
+
+# Ignore IDE/editor configuration files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore coverage and testing files
+htmlcov/
+.tox/
+.coverage
+*.cover
+*.coverage.*
+
+# Ignore Django migrations (optional if you don't want to track them)
+**/migrations/**
+
+# Ignore static and media files (optional if generated dynamically)
+staticfiles/
+media/
+
+# Ignore other build and distribution files
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Ignore node_modules for frontend packages
+node_modules/
+
+# Ignore temporary and cache files
+*.tmp
+*.cache
+*.bak
+*.old
+
+
+
+# Ignore CI/CD configurations 
+*.yaml
+*.yml
+
+# Ignore gitconfig.py file
+gitconfig.py
+
+
+
+
+#Ignore Google App Engin Congiguration 
+app.yaml

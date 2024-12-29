@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add subtle 3D text shadow */
+}
+
+.loading-circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: transparent;
+    border: 6px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #ffffff;
+    animation: spin 1.5s linear infinite;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6),
+        -4px -4px 8px rgba(255, 255, 255, 0.2), /* 3D highlight */
+        inset 2px 2px 6px rgba(255, 255, 255, 0.3),
+        inset -2px -2px 6px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
+}
+
+.loading-circle::before,
+.loading-circle::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 6px solid rgba(255, 255, 255, 0.2);
+    animation: spin 1.5s linear infinite;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6),
+        -4px -4px 8px rgba(255, 255, 255, 0.2),
+        inset 2px 2px 6px rgba(255, 255, 255, 0.3),
+        inset -2px -2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.loading-circle::before {
+    border-top-color: #4caf50;
+    animation-delay: 0.3s;
+}
+
+.loading-circle::after {
+    border-top-color: #ff5722;
+    animation-delay: 0.6s;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

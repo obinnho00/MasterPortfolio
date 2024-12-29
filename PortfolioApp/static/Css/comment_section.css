@@ -1,0 +1,175 @@
+.bug-reports-page {
+    width: 100%;
+    background-color: transparent;
+    padding-top: 100px; /* Add padding to move content below the header */
+    box-sizing: border-box;
+}
+
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.bug-reports-page #fixed-bug-reports-header {
+
+    top: 60px; /* Adjust to ensure it stays below the main header */
+    width: 100%;
+    z-index: 300;
+    background-color: transparent; /* Match the background of the page */
+    color: black;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+
+    
+    
+}
+
+.bug-reports-page .list-group {
+    margin-bottom: 15px;
+}
+
+.bug-reports-page .list-group-item {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+    background-color: transparent;
+    border: transparent;
+    border-radius: 55px;
+    margin-bottom: 5px;
+}
+
+.bug-reports-page .list-group-item small {
+    font-size: 0.8rem;
+    color: green;
+}
+
+
+
+.bug-reports-page textarea.form-control {
+    resize: none;
+    font-size: 0.9rem;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 55px;
+    padding: 8px;
+}
+
+.bug-reports-page textarea.form-control:focus {
+    border-color: transparent;
+    outline: none;
+    box-shadow: transparent;
+}
+
+.bug-reports-page .btn-submit {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.bug-reports-page .btn-submit:hover {
+    background-color: transparent;
+}
+
+.bug-reports-page .filter-form {
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bug-reports-page .filter-form .form-select {
+    width: auto;
+    font-size: 0.9rem;
+    border-radius: 55px;
+}
+
+.bug-reports-page .filter-form .btn-primary {
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    border-radius: 55px;
+}
+
+.bug-reports-page .container-fluid {
+    width: 100%;
+    margin: 0 auto;
+    padding: 3px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: red;
+}
+
+.bug-reports-page .card {
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    min-height: 600px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 55px;
+    overflow: hidden;
+}
+
+.bug-reports-page .card-body {
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+    background-color: transparent;
+}
+
+.bug-reports-page .card-header {
+    background-color: transparent;
+    color:transparent;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 1rem;
+    text-align: left;
+}
+
+
+
+
+.bug-reports-page .card-body h6 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.bug-reports-page .card-body p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.bug-reports-page .card-body p small {
+    display: block;
+    margin-top: 5px;
+    color: #777;
+    font-size: 0.85rem;
+}
+
+.bug-reports-page .comments-section {
+    margin-top: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 150px;
+    padding: 10px;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+.bug-reports-page .comments-section h6 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #444;
+}
