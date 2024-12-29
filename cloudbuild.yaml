@@ -1,0 +1,26 @@
+steps:
+# Step 1: Install dependencies
+- name: 'python:3.9'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py makemigrations || echo "No migrations to make"
+      python manage.py migrate
+
+# Step 2: Run tests
+- name: 'python:3.9'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      pip install -r requirements.txt
+      python manage.py test
+
+# Step 3: Deploy to App Engine if tests pass
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy', '--quiet']
+
+timeout: '1200s'

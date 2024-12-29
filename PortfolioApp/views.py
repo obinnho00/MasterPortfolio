@@ -9,6 +9,7 @@ import markdown2
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpRequest, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import FileResponse, Http404
 
 from django.conf import settings
 from django.urls import reverse
@@ -36,9 +37,7 @@ class Home(View):
 class Introduction(View):
 
     def get(self, request):
-        """
-        Handle GET request to fetch data and render the template.
-        """
+       
       
         query = "SELECT id, introduction FROM about_me"
         with connection.cursor() as cursor:
@@ -384,7 +383,7 @@ class PostBug(View):
 
         return redirect(reverse('bug_reports'))
     
-from django.http import FileResponse, Http404
+
 
 class DownloadCVView(View):
     def get(self, request):
