@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: 'mydevportfolio-444617' # Your Google Cloud project ID
   REGION: 'us-east1' # Your region
-  SERVICE: 'web-api' # Your Cloud Run service name
+  SERVICE: 'web-api' 
 
 jobs:
   deploy:
@@ -41,4 +41,8 @@ jobs:
 
       # Step 4: Output the Cloud Run URL
       - name: 'Show output'
-        run: echo "Cloud Run URL: ${{ steps.deploy.outputs.url }}"
+        run: echo "CLOUD_RUN_URL=${{ steps.deploy.outputs.url }}" >> $GITHUB_ENV
+
+      # Step 5: Use the Cloud Run URL (Example)
+      - name: 'Test Deployed Service'
+        run: curl $CLOUD_RUN_URL
