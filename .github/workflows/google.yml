@@ -25,12 +25,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Authenticate to Google Cloud debug
-      - name: Authenticate to Google Cloud
+      # Retrieve Service Account Key from Secret Manager
+      - name: Retrieve Service Account Key from Secret Manager
         run: |-
-            echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > gcloud-key.json
-            gcloud auth activate-service-account --key-file=gcloud-key.json
-            gcloud config set project ${{ env.PROJECT_ID }}
+          gcloud secrets versions access latest --secret="GCLOUD_SERVICE_ACCOUNT_KEY" > gcloud-key.json
+          gcloud auth activate-service-account --key-file=gcloud-key.json
+          gcloud config set project ${{ env.PROJECT_ID }}
+
+      # Cleanup Key File
+      - name: Cleanup Key File
+        run: rm -f gcloud-key.json
 
       # Docker Authentication for Artifact Registry
       - name: Docker Auth
