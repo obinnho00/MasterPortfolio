@@ -1,13 +1,14 @@
 steps:
-  # Step 1: Authenticate to Google Cloud
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        echo "$_GCLOUD_KEY" > /workspace/sa-key.json
+        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" | base64 --decode > /workspace/sa-key.json
         gcloud auth activate-service-account --key-file=/workspace/sa-key.json
-        gcloud config set project $_PROJECT_ID
+        gcloud config set project ${{ env.PROJECT_ID }}
+
+
 
   # Step 2: Install dependencies
   - name: 'python:3.9'
