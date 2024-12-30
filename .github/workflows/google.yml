@@ -13,7 +13,7 @@ env:
   DEPLOYMENT_NAME: 'django-app'        # Your Kubernetes deployment name
   REPOSITORY: 'django-app-repo'        # Your Artifact Registry repository
   IMAGE: 'django-app-image'
- workload_identity_provider: "//iam.googleapis.com/projects/mydevportfolio-444617/locations/global/workloadIdentityPools/github-pool-id/providers/github-provider-id"
+ workload_identity_provider: "https://iam.googleapis.com/projects/90517001107/locations/global/workloadIdentityPools/github-pool-id/providers/github-provider-id"
 
 
 jobs:
