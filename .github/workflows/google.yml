@@ -13,7 +13,8 @@ env:
   DEPLOYMENT_NAME: 'django-app'
   REPOSITORY: 'django-app-repo'
   IMAGE: 'django-app-image'
-  WORKLOAD_IDENTITY_PROVIDER: "https://iam.googleapis.com/projects/90517001107/locations/global/workloadIdentityPools/web-api-pool-id/providers/github"
+  workload_identity_provider: "//iam.googleapis.com/projects/90517001107/locations/global/workloadIdentityPools/web-api-pool-id/providers/github"
+
 
 jobs:
   setup-build-publish-deploy:
