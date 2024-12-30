@@ -13,7 +13,7 @@ env:
   DEPLOYMENT_NAME: 'django-app'
   REPOSITORY: 'django-app-repo'
   IMAGE: 'django-app-image'
-  WORKLOAD_IDENTITY_PROVIDER: "principal://iam.googleapis.com/projects/90517001107/locations/global/workloadIdentityPools/github-pool-id/subject/SUBJECT_ATTRIBUTE_VALUE"
+  WORKLOAD_IDENTITY_PROVIDER: "https://iam.googleapis.com/projects/90517001107/locations/global/workloadIdentityPools/web-api-pool-id/providers/github"
 
 jobs:
   setup-build-publish-deploy:
@@ -72,3 +72,11 @@ jobs:
           kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} \
             django-container=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${GITHUB_SHA}
           kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }}
+
+      # Interact with Cloud Storage
+      - name: 'List Cloud Storage Buckets'
+        run: gcloud storage buckets list
+
+      # Interact with Compute Engine
+      - name: 'List Compute Engine Instances'
+        run: gcloud compute instances list

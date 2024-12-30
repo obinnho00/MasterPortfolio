@@ -22,6 +22,22 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['app', 'deploy', '--quiet']
 
+  # Step 5: List Cloud Storage Buckets
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'storage'
+      - 'buckets'
+      - 'list'
+
+  # Step 6: List Compute Engine Instances
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'compute'
+      - 'instances'
+      - 'list'
+
 timeout: '1200s'
 
 # Optional logging configuration
