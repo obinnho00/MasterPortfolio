@@ -28,7 +28,7 @@ jobs:
       # Retrieve Service Account Key from Secret Manager
       - name: Retrieve Service Account Key from Secret Manager
         run: |-
-          gcloud secrets versions access latest --secret="GCLOUD_SERVICE_ACCOUNT_KEY" > gcloud-key.json
+          gcloud secrets versions access latest --secret="GCLOUD_SERVICE_ACCOUNT_KEY" --project="${{ env.PROJECT_ID }}" > gcloud-key.json
           gcloud auth activate-service-account --key-file=gcloud-key.json
           gcloud config set project ${{ env.PROJECT_ID }}
 
