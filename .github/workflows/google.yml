@@ -25,7 +25,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Retrieve Service Account Key from Secret Manager
+      # Authenticate to Google Cloud using personal account or service account
+      - name: Authenticate to Google Cloud
+        run: |-
+          gcloud auth login --quiet
+          gcloud config set account t85095968@gmail.com
+          gcloud config set project ${{ env.PROJECT_ID }}
+
+      # Retrieve Service Account Key from Secret Manager (if needed)
       - name: Retrieve Service Account Key from Secret Manager
         run: |-
           gcloud secrets versions access latest --secret="GCLOUD_SERVICE_ACCOUNT_KEY" --project="${{ env.PROJECT_ID }}" > gcloud-key.json
