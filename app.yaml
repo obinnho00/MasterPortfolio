@@ -1,13 +1,54 @@
-runtime: python39
-entrypoint: gunicorn -b :$PORT ProFileHub.wsgi.application
+name: Deploy to Google App Engine
 
-env_variables:
-  DJANGO_SETTINGS_MODULE: "ProFileHub.settings"
+on:
+  push:
+    branches:
+      - main  # Triggers deployment only for the 'main' branch
 
-handlers:
-- url: /static
-  static_dir: staticfiles  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-- url: /.*
-  script: auto
+    steps:
+    # Step 1: Check out the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
+    # Step 2: Authenticate with Google Cloud
+    - name: Authenticate with Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+    # Step 3: Install the gcloud CLI
+    - name: Install gcloud CLI
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        export_default_credentials: true
+
+    # Step 4: Replace the placeholder in app.yaml with the secret key
+    - name: Replace secret key placeholder in app.yaml
+      run: |
+        sed -i "s/_PLACEHOLDER_/${{ secrets.DJANGO_SECRET_KEY }}/g" app.yaml
+
+    # Step 5: Install Python dependencies
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    # Step 6: Run database migrations (optional)
+    - name: Run database migrations
+      run: |
+        python manage.py makemigrations || echo "No migrations to apply"
+        python manage.py migrate
+
+    # Step 7: Deploy to Google App Engine
+    - name: Deploy to App Engine
+      run: |
+        gcloud app deploy --quiet

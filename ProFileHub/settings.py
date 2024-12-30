@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'PortfolioApp',
     'crispy_forms',
     'crispy_bootstrap5',
+    
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
 
 ]
@@ -139,7 +141,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "PortfolioApp/static"),  # Dynamically resolve the absolute path
 ]
