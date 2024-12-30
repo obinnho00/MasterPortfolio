@@ -3,17 +3,17 @@ name: 'Build and Deploy to GKE'
 on:
   push:
     branches:
-      - main  # Triggers on push to the main branch
+      - main
 
 env:
-  PROJECT_ID: 'mydevportfolio-444617'  # Your Google Cloud Project ID
-  GAR_LOCATION: 'us-east1'             # Your preferred region
-  GKE_CLUSTER: 'django-cluster'        # Your GKE cluster name
-  GKE_ZONE: 'us-east1-b'               # Your GKE cluster zone
-  DEPLOYMENT_NAME: 'django-app'        # Your Kubernetes deployment name
-  REPOSITORY: 'django-app-repo'        # Your Artifact Registry repository
+  PROJECT_ID: 'mydevportfolio-444617'
+  GAR_LOCATION: 'us-east1'
+  GKE_CLUSTER: 'django-cluster'
+  GKE_ZONE: 'us-east1-b'
+  DEPLOYMENT_NAME: 'django-app'
+  REPOSITORY: 'django-app-repo'
   IMAGE: 'django-app-image'
-  workload_identity_provider: "//iam.googleapis.com/projects/mydevportfolio-444617/locations/global/workloadIdentityPools/github-pool-id/providers/github-provider-id"
+  WORKLOAD_IDENTITY_PROVIDER: "//iam.googleapis.com/projects/mydevportfolio-444617/locations/global/workloadIdentityPools/github-pool-id/providers/github-provider-id"
 
 jobs:
   setup-build-publish-deploy:
@@ -24,6 +24,7 @@ jobs:
     permissions:
       contents: 'read'
       id-token: 'write'
+      packages: 'write'
 
     steps:
       # Checkout the repository
@@ -36,6 +37,7 @@ jobs:
         uses: 'google-github-actions/auth@v2'
         with:
           workload_identity_provider: '${{ env.WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: 't85095968@gmail.com'
 
       # Docker Authentication for Artifact Registry
       - name: 'Docker Auth'
@@ -52,10 +54,14 @@ jobs:
           cluster_name: '${{ env.GKE_CLUSTER }}'
           location: '${{ env.GKE_ZONE }}'
 
+      # Verify Kubernetes Context
+      - name: 'Verify Kubernetes Context'
+        run: kubectl config get-contexts
+
       # Build and Push Docker Image
       - name: 'Build and Push Docker Container'
         run: |-
-          DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}"
+          DOCKER_TAG="${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${GITHUB_SHA}"
 
           docker build -t "${DOCKER_TAG}" .
           docker push "${DOCKER_TAG}"
@@ -63,6 +69,6 @@ jobs:
       # Deploy to GKE
       - name: 'Deploy to GKE'
         run: |-
-          kubectl set image deployment/${DEPLOYMENT_NAME} \
-            django-container=${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}
-          kubectl rollout status deployment/${DEPLOYMENT_NAME}
+          kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} \
+            django-container=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${GITHUB_SHA}
+          kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }}
