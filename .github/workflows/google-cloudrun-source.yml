@@ -10,7 +10,7 @@ env:
   REGION: 'us-east1' # Your region
   SERVICE: 'web-api' 
 
-jobs:
+jobs: # all jobs  to be done 
   deploy:
     runs-on: 'ubuntu-latest'
 
