@@ -1,54 +1,27 @@
-name: Deploy to Google App Engine
+runtime: python39  # Using Python 3.9 runtime
+entrypoint: gunicorn -b :$PORT ProFileHub.wsgi:application
 
-on:
-  push:
-    branches:
-      - main  # Triggers deployment only for the 'main' branch
+instance_class: F2  # Instance class, adjust based on traffic and requirements
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+env_variables:
+  DJANGO_SETTINGS_MODULE: "ProFileHub.settings"  # Django settings module
+  SECRET_KEY: "_PLACEHOLDER_"  # Placeholder for SECRET_KEY, replaced in your CI/CD pipeline
+  DEBUG: "False"
 
-    steps:
-    # Step 1: Check out the repository
-    - name: Checkout repository
-      uses: actions/checkout@v3
+handlers:
+  - url: /static
+    static_dir: staticfiles  # Serve static files from this directory
+  - url: /.*
+    script: auto  # Automatically detect WSGI entry point
 
-    # Step 2: Authenticate with Google Cloud
-    - name: Authenticate with Google Cloud
-      uses: google-github-actions/auth@v1
-      with:
-        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+automatic_scaling:
+  target_cpu_utilization: 0.65  # Auto-scaling based on CPU
+  min_instances: 1  # Minimum number of instances
+  max_instances: 5  # Maximum number of instances
 
-    # Step 3: Install the gcloud CLI
-    - name: Install gcloud CLI
-      uses: google-github-actions/setup-gcloud@v1
-      with:
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
-        export_default_credentials: true
-
-    # Step 4: Replace the placeholder in app.yaml with the secret key
-    - name: Replace secret key placeholder in app.yaml
-      run: |
-        sed -i "s/_PLACEHOLDER_/${{ secrets.DJANGO_SECRET_KEY }}/g" app.yaml
-
-    # Step 5: Install Python dependencies
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-
-    # Step 6: Run database migrations (optional)
-    - name: Run database migrations
-      run: |
-        python manage.py makemigrations || echo "No migrations to apply"
-        python manage.py migrate
-
-    # Step 7: Deploy to Google App Engine
-    - name: Deploy to App Engine
-      run: |
-        gcloud app deploy --quiet
+health_check:
+  enable_health_check: True
+  check_interval_sec: 10  # Interval for health checks
+  timeout_sec: 4  # Timeout for health checks
+  unhealthy_threshold: 2  # Number of failed health checks before marking unhealthy
+  healthy_threshold: 2  # Number of successful health checks before marking healthy
