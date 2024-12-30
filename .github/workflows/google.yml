@@ -13,7 +13,7 @@ env:
   DEPLOYMENT_NAME: 'django-app'
   REPOSITORY: 'django-app-repo'
   IMAGE: 'django-app-image'
-  WORKLOAD_IDENTITY_PROVIDER: "//iam.googleapis.com/projects/mydevportfolio-444617/locations/global/workloadIdentityPools/github-pool-id/providers/github-provider-id"
+  WORKLOAD_IDENTITY_PROVIDER: "principal://iam.googleapis.com/projects/90517001107/locations/global/workloadIdentityPools/github-pool-id/subject/SUBJECT_ATTRIBUTE_VALUE"
 
 jobs:
   setup-build-publish-deploy:
@@ -37,7 +37,7 @@ jobs:
         uses: 'google-github-actions/auth@v2'
         with:
           workload_identity_provider: '${{ env.WORKLOAD_IDENTITY_PROVIDER }}'
-          service_account: 't85095968@gmail.com'
+          service_account: 'mydevportfolio-444617@appspot.gserviceaccount.com'
 
       # Docker Authentication for Artifact Registry
       - name: 'Docker Auth'
