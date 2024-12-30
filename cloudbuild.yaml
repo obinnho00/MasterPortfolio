@@ -42,4 +42,5 @@ substitutions:
 # Optional logging configuration
 options:
   logging: CLOUD_LOGGING_ONLY
-  caching: DISABLED
+  machineType: E2_HIGHCPU_8
+  diskSizeGb: 200
