@@ -28,7 +28,8 @@ SECRET_KEY  = set
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.238.135.221', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['35.238.135.221', '127.0.0.1', 'localhost', 'mydevportfolio-444617.uc.r.appspot.com']
+
 
 
 # Application definition
