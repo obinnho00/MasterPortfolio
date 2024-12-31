@@ -1,0 +1,44 @@
+name: Deploy to Google Cloud Run with Docker
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: mydevportfolio-444617
+  REGION: us-east1
+  SERVICE: web-api
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Authenticate with Google Cloud
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.SA_CREDS }}'
+
+      # Step 3: Configure Docker for Google Cloud
+      - name: Configure Docker
+        run: gcloud auth configure-docker
+
+      # Step 4: Build and Push Docker Image
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }} .
+          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}
+
+      # Step 5: Deploy to Cloud Run
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE }} \
+            --image gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }} \
+            --region ${{ env.REGION }} \
+            --allow-unauthenticated

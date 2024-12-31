@@ -24,7 +24,7 @@ COPY . /app/
 RUN python manage.py collectstatic --noinput
 
 # Expose the application's port
-EXPOSE 8000
+EXPOSE 8080
 
 # Define the command to run the application
-CMD ["gunicorn", "ProFileHub.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "ProFileHub.wsgi:application", "--bind", "0.0.0.0:8080"]
