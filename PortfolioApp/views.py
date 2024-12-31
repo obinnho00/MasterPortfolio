@@ -349,7 +349,6 @@ class PostBug(View):
         report = request.POST.get('report')
         solution = request.POST.get('solution', '')
 
-        # Validate required fields
         if not email or not bug_type or not report:
             return JsonResponse({"error": "Email, Bug Type, and Report fields are required."}, status=400)
 
