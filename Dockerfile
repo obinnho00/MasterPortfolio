@@ -23,7 +23,7 @@ COPY . /app/
 # Collect static files
 RUN python manage.py collectstatic --noinput --clear
 
-# Expose the application's port
+
 EXPOSE 8080
 
 # Set default Gunicorn parameters (Optional but good practice)
