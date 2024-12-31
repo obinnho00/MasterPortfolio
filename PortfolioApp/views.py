@@ -221,8 +221,6 @@ class WebsitePolicyView(View):
                 }
                 for row in cursor.fetchall()
             ]
-
-        # Render the template with policies data
         return render(request, 'policy_popup.html', {'policies': policies})
 
 

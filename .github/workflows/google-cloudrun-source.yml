@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: mydevportfolio-444617
   REGION: us-east1
-  SERVICE: web-api
+  SERVICE: cloud-based-website
 
 jobs:
   build-and-deploy:
