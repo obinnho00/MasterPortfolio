@@ -121,6 +121,16 @@
     color: white; 
 }
 
+.learn-more-link {
+    color: red; /* Sets the text color to red */
+    text-decoration: none; /* Removes the underline for cleaner appearance */
+}
+
+.learn-more-link:hover {
+    text-decoration: underline; /* Adds underline on hover for better interactivity */
+}
+
+
 /* Content List */
 .project-list {
     background-color: transparent; 
