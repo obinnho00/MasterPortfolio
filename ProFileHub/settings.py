@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-from PortfolioApp.gitconfig.gitconfig import set,DNAME,DUSER,DPASSWORD,DHOST,DPORT
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -93,6 +93,25 @@ CRISPY_TEMPLATE_PACK = "bootstrap5",
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+
+try:
+    from PortfolioApp.gitconfig.gitconfig import (
+        set,  
+        DNAME,
+        DUSER,
+        DPASSWORD,
+        DHOST,
+        DPORT,
+    )
+except ImportError:
+    # Fallback to environment variables or default values if gitconfig.py is not found
+    set = os.getenv('SECRET_KEY', 'default_secret_key')  # Use an environment variable for the secret key
+    DNAME = os.getenv('DB_NAME', 'default_db_name')
+    DUSER = os.getenv('DB_USER', 'default_user')
+    DPASSWORD = os.getenv('DB_PASSWORD', 'default_password')
+    DHOST = os.getenv('DB_HOST', 'localhost')
+    DPORT = os.getenv('DB_PORT', '5432')
 
 DATABASES = {
     'default': {
