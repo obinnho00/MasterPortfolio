@@ -223,10 +223,6 @@ class WebsitePolicyView(View):
             ]
         return render(request, 'policy_popup.html', {'policies': policies})
 
-
-
-
-
 class ReferenceView(View):
     def get(self, request):
         # Use raw SQL for fetching data (if required)

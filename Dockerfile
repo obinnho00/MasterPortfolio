@@ -29,8 +29,5 @@ RUN python manage.py collectstatic --noinput --clear
 # Expose the application's port
 EXPOSE 8080
 
-# Set default Gunicorn parameters (Optional but good practice)
-ENV GUNICORN_CMD_ARGS="--bind=0.0.0.0:8080 --workers=3 --threads=2 --timeout=120"
-
-# Define the command to run the application
-CMD ["gunicorn", "ProFileHub.wsgi:application"]
+# Add the ENTRYPOINT for running the application
+ENTRYPOINT ["gunicorn", "-b", "0.0.0.0:8080", "ProFileHub.wsgi:application"]
