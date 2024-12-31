@@ -21,7 +21,8 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now, timedelta
-from PortfolioApp.gitconfig.gitconfig import GITHUB_API_URL, USERNAME, TOKEN
+from PortfolioApp.gitconfig import GITHUB_API_URL, USERNAME, TOKEN
+
 
 from .models import AboutMe, Project, TechnicalSkill, User, BugReport, Comment, CV
 from .forms import CommentForm
