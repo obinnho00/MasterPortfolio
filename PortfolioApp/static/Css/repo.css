@@ -1,3 +1,4 @@
+/* Project Section Styling */
 .project-section {
     display: flex;
     justify-content: center;
@@ -23,14 +24,15 @@
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4), 4px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Project List Styling */
 .project-list {
     background-color: transparent;
     color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 800px;
+    width: 100%;
+    max-width: 1200px;
     height: 70%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -48,10 +50,11 @@
     background-color: transparent;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: none;
     text-align: center;
+    box-shadow: none; /* Removed unnecessary box-shadow for minimalism */
 }
 
+/* Project Item Image */
 .project-item .project-image img {
     width: 150px;
     height: 150px;
@@ -62,6 +65,7 @@
     margin-bottom: 15px;
 }
 
+/* Project Item Text Styling */
 .project-name {
     color: green;
     font-style: italic;
@@ -69,10 +73,17 @@
 
 .commit-link {
     color: green;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
+.commit-link:hover {
+    color: darkgreen; /* Slight color change on hover */
+}
+
+/* Scrollbar Styling for Project List */
 .project-list::-webkit-scrollbar {
-    width: 0px;
+    width: 0px; /* Hides scrollbar */
 }
 
 .project-list::-webkit-scrollbar-thumb {
@@ -80,27 +91,35 @@
     border-radius: 4px;
 }
 
-.project-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    width: 100%;
-    max-width: 1200px;
-    justify-content: center;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
+/* Responsive Adjustments */
 @media (max-width: 900px) {
     .project-list {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* Two columns for medium screens */
+        gap: 15px; /* Adjust spacing */
+    }
+
+    .project-item .project-image img {
+        width: 120px; /* Reduce image size */
+        height: 120px;
+    }
+
+    .project-name {
+        font-size: 0.9rem; /* Adjust font size */
     }
 }
 
 @media (max-width: 600px) {
     .project-list {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(1, 1fr); /* Single column for small screens */
+        gap: 10px; /* Reduce spacing */
+    }
+
+    .project-item .project-image img {
+        width: 100px; /* Further reduce image size */
+        height: 100px;
+    }
+
+    .project-name {
+        font-size: 0.8rem; /* Adjust font size for small screens */
     }
 }

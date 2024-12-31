@@ -16,13 +16,13 @@ Projects
         <p>
             Please note that the repositories listed below might not represent all of my work.
             For the most up-to-date information on my current activities and projects,
-            feel free to visit my <a href="https://github.com/yourusername" target="_blank">GitHub profile</a>.
+            feel free to visit my <a href="https://github.com/obinnho00" target="_blank">GitHub profile</a>.
         </p>
         <div class="current-page mt-3 text-center"> Page </div>
     </div>
     <div id="projectsGrid" class="col justify-content-center">
         {% for project in projects %}
-        <div class="col-12 row-md-6"> 
+        <div class="col-12 row-md-3"> 
             <div class="project-card-wrapper card project-card">
                 <div class="card-header bg-primary text-white">
                     <h5>{{ project.title }}</h5>
@@ -54,40 +54,69 @@ Projects
 
 {% block extra_js %}
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const projectsGrid = document.getElementById("projectsGrid");
-        const projectCards = Array.from(document.querySelectorAll(".project-card-wrapper"));
-        const currentPageDisplay = document.querySelector(".current-page");
-        const cardsPerPage = 3;
-        let currentPage = 0;
 
-        // Function to render projects and update the current page number
-        function renderProjects(page) {
-            const start = page * cardsPerPage;
-            const end = start + cardsPerPage;
+document.addEventListener("DOMContentLoaded", function () {
+    const projectsGrid = document.getElementById("projectsGrid");
+    const projectCards = Array.from(document.querySelectorAll(".project-card-wrapper"));
+    const currentPageDisplay = document.querySelector(".current-page");
+    const cardsPerPage = 2; // Number of cards to display per page
+    let currentPage = 0;
 
-            // Show only the relevant cards
-            projectCards.forEach((card, index) => {
-                card.style.display = index >= start && index < end ? "block" : "none";
-            });
+    // Ensure that required elements are found
+    if (!projectsGrid || projectCards.length === 0) {
+        console.error("projectsGrid or projectCards not found.");
+        return;
+    }
 
-            // Update the current page number display
-            currentPageDisplay.textContent = `Page: ${page + 1}`;
-        }
+    console.log("Script initialized. Total project cards:", projectCards.length);
 
-        // Handle mouse scroll to change pages
-        function handleScroll(event) {
-            if (event.deltaY > 0 && (currentPage + 1) * cardsPerPage < projectCards.length) {
-                currentPage++;
-            } else if (event.deltaY < 0 && currentPage > 0) {
-                currentPage--;
+    // Function to render projects and update the current page number
+    function renderProjects(page) {
+        console.log(`Rendering page ${page + 1}`);
+
+        const totalCards = projectCards.length;
+        const start = page * cardsPerPage;
+        const end = start + cardsPerPage;
+
+        // Ensure cards stay within bounds
+        projectCards.forEach((card, index) => {
+            if (index >= start && index < end) {
+                card.style.display = "block";
+                console.log(`Displaying card index ${index}`);
+            } else {
+                card.style.display = "none";
             }
-            renderProjects(currentPage);
-        }
+        });
 
-        renderProjects(currentPage); // Render the first page
-        projectsGrid.addEventListener("wheel", handleScroll); // Add event listener for scroll
-    });
+        // Update the current page number display
+        const totalPages = Math.ceil(totalCards / cardsPerPage);
+        currentPageDisplay.textContent = `Page: ${page + 1} of ${totalPages}`;
+    }
+
+    // Handle mouse scroll to change pages
+    function handleScroll(event) {
+        const totalPages = Math.ceil(projectCards.length / cardsPerPage);
+
+        if (event.deltaY > 0 && currentPage < totalPages - 1) {
+            currentPage++;
+            console.log("Scrolled down. Current page:", currentPage + 1);
+        } else if (event.deltaY < 0 && currentPage > 0) {
+            currentPage--;
+            console.log("Scrolled up. Current page:", currentPage + 1);
+        }
+        renderProjects(currentPage);
+    }
+
+    // Initialize the first page render
+    renderProjects(currentPage);
+
+    // Add event listener for scroll
+    projectsGrid.addEventListener("wheel", handleScroll);
+});
+
+
+    
+    
 
 </script>
 

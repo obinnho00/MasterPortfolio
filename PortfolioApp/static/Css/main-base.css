@@ -32,7 +32,7 @@ body::before, body::after {
     transform: translate(-50%, -50%) rotateX(30deg) rotateY(25deg);
     box-shadow: 0px 25px 50px rgba(0, 0, 0, 0.8);
     z-index: -1;
-    animation: rotate3D 10s infinite ease-in-out alternate;
+    animation: rotate3D 3s infinite ease-in-out alternate;
 }
 
 body::after {
@@ -43,7 +43,7 @@ body::after {
 
 /* Floating Layers */
 body::before {
-    animation: float 10s infinite ease-in-out alternate-reverse, rotate3D 30s infinite linear;
+    animation: float 2s infinite ease-in-out alternate-reverse, rotate3D 30s infinite linear;
 }
 
 @keyframes rotate3D {
@@ -95,7 +95,7 @@ body::before:nth-child(3) {
     height: 130%;
     background: radial-gradient(circle, rgba(50, 50, 50, 0.1), rgba(0, 0, 0, 0.7));
     transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg);
-    animation: rotateLayer3 10s infinite linear alternate;
+    animation: rotateLayer3 2s infinite linear alternate;
 }
 
 @keyframes rotateLayer3 {
@@ -134,33 +134,29 @@ body::before:nth-child(4) {
     }
 }
 
-
-
-
+/* Navigation Bar Styling */
 .custom-navigation {
     background: linear-gradient(135deg, #333434, #2a5298);
-    width: 100;
-    position: fixed;
-    /* Keeps the header always at the top */
-    top: 0;
-    /* Sticks it to the top of the viewport */
-    left: 0;
     width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 900000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
 }
 
-/* Custom Navbar Brand */
 .top-nave-Name {
     font-size: 1.5rem;
     font-weight: bold;
     color: green;
     border-radius: 55px;
-    
 }
 
 .top-nave-Name:hover {
     color: black;
-
 }
 
 .top-nav-title {
@@ -169,52 +165,29 @@ body::before:nth-child(4) {
     font-size: 1.5rem;
 }
 
-/* Custom Button Styles */
-.chart-button {
+/* Button Styles */
+.chart-button, .intro-button, .project-button, .cv-button, .skill-button {
     background-color: transparent;
     color: white;
     border-radius: 20px;
     padding: 10px 20px;
     border: transparent;
     transition: all 0.3s ease-in-out;
-
 }
 
-.chart-icon {
-    color: #218838;
-
-}
-
-.chart-button:hover {
+.chart-button:hover, .intro-button:hover, .project-button:hover, .cv-button:hover, .skill-button:hover {
     background-color: rgb(76, 76, 76);
     color: #bfd1e3;
     border-color: #b6bcc2;
 }
 
-.intro-button {
-    background-color: transparent;
-    color: white;
-    border-radius: 20px;
+.project-menue {
+    background-color: lightslategray;
+    color: black;
+    border-radius: 25px;
     padding: 10px 20px;
-    border: transparent;
-    transition: all 0.3s ease-in-out;
-
-}
-
-.intro-button:hover {
-    background-color: rgb(76, 76, 76);
-    color: #bfd1e3;
-    border-color: #b6bcc2;
-}
-
-.project-button {
-    background-color: transparent;
-    color: white;
-    border-radius: 20px;
-    padding: 10px 20px;
-    border: transparent;
-    transition: all 0.3s ease-in-out;
-
+    border: black;
+    transition: all 0.1s ease-in-out;
 }
 
 .drop-down-item {
@@ -223,53 +196,7 @@ body::before:nth-child(4) {
     padding: 10px 20px;
     border: transparent;
     transition: all 0.3s ease-in-out;
-
 }
-
-.project-menue {
-
-    background-color: lightslategray;
-    color: black;
-    border-radius: 25px;
-    padding: 10px 20px;
-    border: black;
-    transition: all 0.1s ease-in-out;
-
-}
-
-.project-button:hover {
-    background-color: linear-gradient(135deg, #333434, #2a5298);
-    color: #bfd1e3;
-    border-color: #b6bcc2;
-}
-
-.cv-button {
-    background-color: transparent;
-    color: white;
-    border-radius: 20px;
-    padding: 10px 20px;
-    border:transparent;
-    transition: all 0.3s ease-in-out;
-
-}
-
-.skill-button {
-    background-color: transparent;
-    color: white;
-    border-radius: 20px;
-    padding: 10px 20px;
-    border: transparent;
-    transition: all 0.3s ease-in-out;
-
-}
-
-.skill-button:hover,
-.cv-button:hover {
-    background-color:rgb(76, 76, 76);
-    color: #bfd1e3;
-    border-color: #b6bcc2;
-}
-
 
 .fixed-footer {
     position: fixed;
@@ -278,13 +205,61 @@ body::before:nth-child(4) {
     width: 100%;
     z-index: 1000;
     background: linear-gradient(135deg, #333434, #2a5298);
-
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
 }
 
+/* Keyframes */
+@keyframes rotate3D {
+    0%, 100% {
+        transform: translate(-50%, -50%) rotateX(30deg) rotateY(25deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotateX(-20deg) rotateY(-15deg);
+    }
+}
 
+@keyframes rotate3DAlt {
+    0%, 100% {
+        transform: translate(-50%, -50%) rotateX(-30deg) rotateY(-25deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotateX(20deg) rotateY(15deg);
+    }
+}
 
+@keyframes float {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1.02);
+        filter: blur(2px);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(0.98);
+        filter: blur(3px);
+    }
+}
 
-@media screen and (max-width: 768px) {
+/* Responsive Adjustments */
+@media screen and (max-width: 500px) {
+    .custom-navigation {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .left-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .chart-button, .intro-button, .project-button, .cv-button, .skill-button {
+        width: 100%;
+        margin: 5px 0;
+        text-align: center;
+    }
+
     footer {
         padding: 15px 10px;
     }
@@ -296,5 +271,82 @@ body::before:nth-child(4) {
     footer .footer-links a {
         margin: 0 5px;
         font-size: 12px;
+    }
+}
+
+
+/* Navigation Bar Styling */
+.custom-navigation {
+    background: linear-gradient(135deg, #333434, #2a5298);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 900000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    flex-wrap: wrap; /* Allows wrapping for small screens */
+}
+
+/* Logo and Title */
+.name-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.name-title .top-nave-Name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: green;
+    border-radius: 55px;
+}
+
+.name-title .top-nav-title {
+    font-style: italic;
+    color: green;
+    font-size: 1.5rem;
+}
+
+/* Hamburger Menu for Small Screens */
+.navbar-toggler {
+    display: none; /* Hidden on larger screens */
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.navbar-toggler:hover {
+    transform: scale(1.1); /* Slight zoom-in effect on hover */
+}
+
+@media (max-width: 768px) {
+    .navbar-toggler {
+        display: block; /* Show hamburger menu on smaller screens */
+    }
+
+    .custom-navigation {
+        flex-direction: column; /* Stack navigation vertically */
+        align-items: flex-start;
+    }
+
+    .left-nav {
+        display: none; /* Hidden by default on small screens */
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: stretch;
+        width: 100%; /* Full-width buttons */
+    }
+
+    .custom-navigation.active .left-nav {
+        display: flex; /* Show when active */
+    }
+
+    .chart-button, .intro-button, .project-button, .cv-button, .skill-button {
+        width: 100%; /* Full-width buttons on smaller screens */
+        margin: 5px 0;
     }
 }
