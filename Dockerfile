@@ -20,14 +20,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire project into the container
 COPY . /app/
 
+# Ensure the correct permissions (optional for some platforms)
+RUN chmod -R 755 /app
+
 # Collect static files
 RUN python manage.py collectstatic --noinput --clear
 
-
+# Expose the application's port
 EXPOSE 8080
 
 # Set default Gunicorn parameters (Optional but good practice)
-ENV GUNICORN_CMD_ARGS="--bind=0.0.0.0:8080 --workers=3"
+ENV GUNICORN_CMD_ARGS="--bind=0.0.0.0:8080 --workers=3 --threads=2 --timeout=120"
 
 # Define the command to run the application
 CMD ["gunicorn", "ProFileHub.wsgi:application"]

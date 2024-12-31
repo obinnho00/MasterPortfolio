@@ -5,7 +5,7 @@ import json
 import base64
 import requests
 import markdown2
-
+import base64
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpRequest, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -21,9 +21,6 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now, timedelta
-from PortfolioApp.gitconfig import GITHUB_API_URL, USERNAME, TOKEN 
-
-
 from .models import AboutMe, Project, TechnicalSkill, User, BugReport, Comment, CV
 from .forms import CommentForm
 from google.cloud import storage
@@ -45,14 +42,18 @@ class Introduction(View):
             cursor.execute(query)
             content = cursor.fetchall()  
         return render(request, 'intro.html', {'content': content})
-    
+
+
 
 
 class ProjectView(View):
+    USERNAME = "obinnho00"  # Hardcoded username
+    TOKEN = os.getenv('MYGITHUBTOKEN')  # Fetch token from environment
+    GITHUB_API_URL = os.getenv('MYGITHUB_API_URL', 'https://api.github.com')  # Fetch API URL from environment
 
     def get_public_repos(self):
-        url = f"{GITHUB_API_URL}/users/{USERNAME}/repos"
-        headers = {"Authorization": f"token {TOKEN}"}
+        url = f"{self.GITHUB_API_URL}/users/{self.USERNAME}/repos"
+        headers = {"Authorization": f"token {self.TOKEN}"}
         try:
             response = requests.get(url, headers=headers)
             response.raise_for_status()
@@ -61,8 +62,8 @@ class ProjectView(View):
             return {"error": str(e)}
 
     def get_latest_commit(self, repo_name):
-        url = f"{GITHUB_API_URL}/repos/{USERNAME}/{repo_name}/commits"
-        headers = {"Authorization": f"token {TOKEN}"}
+        url = f"{self.GITHUB_API_URL}/repos/{self.USERNAME}/{repo_name}/commits"
+        headers = {"Authorization": f"token {self.TOKEN}"}
         try:
             response = requests.get(url, headers=headers)
             response.raise_for_status()
@@ -81,8 +82,8 @@ class ProjectView(View):
             return {"error": str(e)}
 
     def get_readme(self, repo_name):
-        url = f"{GITHUB_API_URL}/repos/{USERNAME}/{repo_name}/readme"
-        headers = {"Authorization": f"token {TOKEN}"}
+        url = f"{self.GITHUB_API_URL}/repos/{self.USERNAME}/{repo_name}/readme"
+        headers = {"Authorization": f"token {self.TOKEN}"}
         try:
             response = requests.get(url, headers=headers)
             response.raise_for_status()
@@ -92,7 +93,7 @@ class ProjectView(View):
             return "No README.md found"
         except Exception as e:
             return {"error": str(e)}
-        
+
 
 
 class CurrentProjectView(ProjectView):
@@ -139,22 +140,24 @@ class CurrentProjectView(ProjectView):
         return render(request, 'repo.html', {'repositories': results})
 
 
-    
+
+
+
 class PastProjectView(ProjectView):
     def get(self, request, *args, **kwargs):
+        """Fetch and display past projects from the database."""
         try:
-            query = "SELECT * FROM projects"
+            query = "SELECT * FROM projects"  # Adjust table name if needed
             with connection.cursor() as cursor:
                 cursor.execute(query)
                 columns = [col[0] for col in cursor.description]  # Get column names
                 data = [
                     dict(zip(columns, row)) for row in cursor.fetchall()
-                ]  # Map rows to dictionaries
-
+                ] 
             return render(request, "project-Table.html", {"projects": data})
         except Exception as e:
             return HttpResponse(f"Database error: {str(e)}", status=500)
-        
+
 
 class SkillListView(View):
     template_name = 'skill.html'
@@ -248,13 +251,6 @@ class ReferenceView(View):
             return render(request, 'reference.html', {'contacts': []}) 
 
         return render(request, 'reference.html', {'contacts': reference_data})
-
-
-        
-
-
-
-
 
 
 class BugReportsView(View):

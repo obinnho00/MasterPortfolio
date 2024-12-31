@@ -59,20 +59,14 @@ node_modules/
 *.bak
 *.old
 
+# Allow gitconfig.py for deployment
+!PortfolioApp/gitconfig/gitconfig.py
 
-
-# Ignore CI/CD configurations
-# Exclude cloudbuild.yaml and app.yaml from being ignored
+# Ignore CI/CD configurations but allow necessary files
 !cloudbuild.yaml
 !app.yaml
 *.yaml
 *.yml
 
-
-# Ignore gitconfig.py file
-gitconfig.py
-
-
-
-#Ignore Google App Engin Congiguration 
+# Ignore Google App Engine configuration
 app.yaml

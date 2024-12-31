@@ -29,13 +29,35 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker
 
-      # Step 4: Build and Push Docker Image
+      # Step 4: Generate gitconfig.py dynamically
+      - name: Generate gitconfig.py dynamically
+        run: |
+          cat <<EOF > PortfolioApp/gitconfig/gitconfig.py
+          import os
+
+          # GitHub API Configuration
+          GITHUB_API_URL = os.getenv('MYGITHUB_API_URL', '${{ secrets.MYGITHUB_API_URL }}')
+          USERNAME = os.getenv('USERNAME', '${{ secrets.USERNAME }}')
+          TOKEN = os.getenv('MYGITHUBTOKEN', '${{ secrets.MYGITHUBTOKEN }}')
+
+          # Database Configuration
+          DNAME = os.getenv('DB_NAME', '${{ secrets.DB_NAME }}')
+          DUSER = os.getenv('DB_USER', '${{ secrets.DB_USER }}')
+          DPASSWORD = os.getenv('DB_PASSWORD', '${{ secrets.DB_PASSWORD }}')
+          DHOST = os.getenv('DB_HOST', '${{ secrets.DB_HOST }}')
+          DPORT = os.getenv('DB_PORT', '${{ secrets.DB_PORT }}')
+
+          # Django Secret Key
+          set = os.getenv('DJANGO_SECRET_KEY', '${{ secrets.DJANGO_SECRET_KEY }}')
+          EOF
+
+      # Step 5: Build and Push Docker Image
       - name: Build and Push Docker Image
         run: |
           docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }} .
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}
 
-      # Step 5: Deploy to Cloud Run
+      # Step 6: Deploy to Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.SERVICE }} \

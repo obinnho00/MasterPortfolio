@@ -12,18 +12,26 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+
+# Load .env file
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+dotenv_path = BASE_DIR / 'ProFileHub' / '.env'
+load_dotenv(dotenv_path)
+print(f"Loaded USERNAME: {os.getenv('USERNAME')}")
 
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 
-SECRET_KEY  = set
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default_secret_key')
 
 
 DEBUG = True
@@ -96,32 +104,17 @@ CRISPY_TEMPLATE_PACK = "bootstrap5",
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-try:
-    from PortfolioApp.gitconfig.gitconfig import (
-        set,  
-        DNAME,
-        DUSER,
-        DPASSWORD,
-        DHOST,
-        DPORT,
-    )
-except ImportError:
-    # Fallback to environment variables or default values if gitconfig.py is not found
-    set = os.getenv('SECRET_KEY', 'default_secret_key')  # Use an environment variable for the secret key
-    DNAME = os.getenv('DB_NAME', 'default_db_name')
-    DUSER = os.getenv('DB_USER', 'default_user')
-    DPASSWORD = os.getenv('DB_PASSWORD', 'default_password')
-    DHOST = os.getenv('DB_HOST', 'localhost')
-    DPORT = os.getenv('DB_PORT', '5432')
+
+
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DNAME,
-        'USER': DUSER,
-        'PASSWORD': DPASSWORD,
-        'HOST':DHOST,
-        'PORT':DPORT,
+        'NAME': os.getenv('DB_NAME', 'default_db_name'),
+        'USER': os.getenv('DB_USER', 'default_user'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'default_password'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
@@ -161,14 +154,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
+from pathlib import Path
+import os
+
+# Define the base directory of your project
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Static file URL
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Static files directory within the app
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "PortfolioApp/static"),  # Dynamically resolve the absolute path
+    BASE_DIR / 'PortfolioApp' / 'static',  # Static files in the PortfolioApp
 ]
 
-# Define STATIC_ROOT for collectstatic
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# Static files collected root (used by collectstatic)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Optional: Whitenoise settings for production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
