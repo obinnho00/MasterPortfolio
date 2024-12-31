@@ -242,9 +242,9 @@ class ReferenceView(View):
                     for row in cursor.fetchall()
                 ]
         except Exception as e:
-            return render(request, 'reference.html', {'contacts': []}) 
+            return render(request, 'reference-connection.html', {'contacts': []}) 
 
-        return render(request, 'reference.html', {'contacts': reference_data})
+        return render(request, 'reference-connection.html', {'contacts': reference_data})
 
 
 class BugReportsView(View):
