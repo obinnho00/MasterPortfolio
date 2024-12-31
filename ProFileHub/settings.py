@@ -28,9 +28,8 @@ SECRET_KEY  = set
 
 DEBUG = True
 
-#ALLOWED_HOSTS = ['35.238.135.221', '127.0.0.1', 'localhost', '*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'mydevportfolio-444617.uc.r.appspot.com', 'web-api-90517001107.us-east1.run.app', '*']
 
-ALLOWED_HOSTS = ['mydevportfolio-444617.uc.r.appspot.com']
 
 
 
