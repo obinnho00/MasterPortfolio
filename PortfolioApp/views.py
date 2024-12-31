@@ -333,10 +333,6 @@ class BugReportsView(View):
 
 
 
-
-    
-
-
 class PostBug(View):
     template_name = 'Report-bug.html'
 
