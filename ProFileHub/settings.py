@@ -30,7 +30,8 @@ DEBUG = True
 
 #ALLOWED_HOSTS = ['35.238.135.221', '127.0.0.1', 'localhost', '*']
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['mydevportfolio-444617.uc.r.appspot.com']
+
 
 
 # Application definition
